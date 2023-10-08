@@ -153,24 +153,26 @@ function render() {
     const cardElement = cards[i];
 
     pinboard.innerHTML = '';
-    pinboard.innerHTML += renderCard();
+    pinboard.innerHTML += renderCard(cardElement, i);
   }
 }
 
-function renderCard() {
+function renderCard(cardElement, i) {
   return /*html*/ `
     <div class="card" id="card">
           <div class="card-header">
             <div class="card-header--author">
-              
+              <img
+                class="card-header-author--img"
+                src="${cardElement['profileImg']}" />
               <p class="author">Wittgenstein</p>
             
             <a class="card-header__svg" href="#"
               ><img src="img/icons/extend.svg" alt="more actions"
             /></a>
           </div>
-          <div class="card-poster" id="card-sprint">
-            <img src="img/poster/poster1.jpg" alt="post img" />
+          <div class="card-poster">
+            <img src="${cardElement['poster']}"/>
           </div>
           <div class="social-actions">
             <div class="icons-inline">
@@ -189,7 +191,7 @@ function renderCard() {
               <div class="author-commentary--author"><p>Wittgenstein</p></div>
               <div class="author-commentary--comment">
                 <p>
-                  Worüber man nicht sprechen kann, darüber muss man schweigen.
+                  ${cardElement['description']}
                 </p>
               </div>
             </div>
