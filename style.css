@@ -43,6 +43,7 @@ a {
 
 body {
   font-family: 'Karla', sans-serif;
+  font-weight: 300;
   background: linear-gradient(312deg, #1f836f, #0b3431);
 }
 
@@ -58,7 +59,7 @@ header {
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 4rem;
+  padding: 0 8rem;
   height: 5rem;
   box-shadow: 0px 4px 6px 0px rgba(30, 39, 35, 0.175);
   position: fixed;
@@ -151,12 +152,11 @@ input::placeholder {
 
 main {
   margin-top: 5rem;
-  display: flex;
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
   min-height: calc(100vh - 5rem);
-  padding: 2rem 4rem;
+  padding: 2rem 8rem;
 
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -164,11 +164,16 @@ main {
   z-index: 1;
 }
 
+.pinboard {
+  grid-column: 1;
+}
+
 .card {
   border-radius: 0.5rem;
   background-color: #dbe4d9;
   box-shadow: 2px 2px 6px rgba(18, 44, 38, 0.15);
   padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .card-header {
@@ -210,7 +215,7 @@ main {
   grid-template-columns: 1fr 36px;
   gap: 1rem;
   row-gap: 0.5rem;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem 0.5rem;
 }
 
 .icons-inline {
@@ -244,7 +249,6 @@ main {
 }
 
 .like-counter {
-  font-size: 1.125rem;
   font-weight: 600;
   grid-column: 1 / 2;
 }
@@ -268,7 +272,10 @@ main {
   width: 20px;
 }
 
-.author-commentary,
+.author-commentary {
+  display: flex;
+  grid-column: 1 / 3;
+}
 .user-commentary {
   display: flex;
   grid-column: 1;
@@ -277,16 +284,11 @@ main {
 .author-commentary--author,
 .user-commentary--user {
   font-weight: 600;
-  margin-right: 0.5rem;
-}
-
-.author-commentary--comment,
-.user-commentary--comment {
-  grid-column: 2;
+  /* margin-right: 0.25rem; */
 }
 
 .all-comments {
-  grid-column: 1 / 2;
+  grid-column: 1 / 3;
 }
 
 .greyed {
@@ -295,16 +297,20 @@ main {
   font-weight: 600;
 }
 
-/*  */
+/* 
+-------------------
+<<<<< ASIDE >>>>> 
+-------------------
+*/
 
 aside {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .wrapper {
-  padding: 1rem;
+  padding: 1rem 1rem 0.125rem 1rem;
 }
 
 .myprofile {

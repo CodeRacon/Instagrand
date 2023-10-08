@@ -1,27 +1,27 @@
 let cards = [
   {
-    author: 'Wittgenstein',
-    profileImg: 'img/profile/wittgenstein.jpeg',
+    author: 'call_me_wittgenstein',
+    profileImg: 'img/profile/wittgenstein.jpg',
     location: 'Vienna, Austria',
     description: 'Worüber man nicht sprechen kann, darüber muss man schweigen.',
     poster: 'img/poster/poster1.jpg',
   },
   {
-    author: 'Hegel',
-    profileImg: 'img/profile/hegel.jpeg',
+    author: 'georg_w_hegel',
+    profileImg: 'img/profile/hegel.jpg',
     location: 'Ingolstadt, Germany',
     description: 'Die Vernunft ist das höchste Gut des Menschen.',
     poster: 'img/poster/poster2.jpg',
   },
   {
-    author: 'Platon',
-    profileImg: 'img/profile/platon.jpeg',
+    author: 'platonsuperbrain',
+    profileImg: 'img/profile/platon.jpg',
     location: 'Athen, Greece',
     description: 'Die Ideen sind die wahren Realitäten.',
     poster: 'img/poster/poster3.jpg',
   },
   {
-    author: 'Kant',
+    author: 'e_kant',
     profileImg: 'img/profile/kant.jpg',
     location: 'Königsberg, Prussia',
     description:
@@ -29,46 +29,47 @@ let cards = [
     poster: 'img/poster/poster4.jpg',
   },
   {
-    author: 'Aristoteles',
-    profileImg: 'img/profile/aristoteles.jpeg',
+    author: 'aristoteles',
+    profileImg: 'img/profile/aristoteles.jpg',
     location: 'Stagira, Greece',
     description: 'Die Tugend liegt in der Mitte.',
     poster: 'img/poster/poster5.jpg',
   },
   {
-    author: 'Nietzsche',
-    profileImg: 'img/profile/nietzsche.jpeg',
+    author: 'nietzsche_is_the_name',
+    profileImg: 'img/profile/nietzsche.jpg',
     location: 'Röcken, Germany',
     description: 'Gott ist tot.',
     poster: 'img/poster/poster6.jpg',
   },
   {
-    author: 'Sokrates',
-    profileImg: 'img/profile/sokrates.jpeg',
+    author: 'sokrates_so_be_it',
+    profileImg: 'img/profile/sokrates.jpg',
     location: 'Athen, Greece',
     description: 'Das einzig wahre Wissen ist, dass man nichts weiß.',
     poster: 'img/poster/poster7.jpg',
   },
   {
-    author: 'Descartes',
-    profileImg: 'img/profile/descartes.gif',
+    author: 'descartes',
+    profileImg: 'img/profile/descartes.jpg',
     location: 'La Haye en Touraine, France',
     description: 'Ich denke, also bin ich.',
     poster: 'img/poster/poster8.jpg',
   },
   {
-    author: 'Camus',
-    profileImg: 'img/profile/camus.jpeg',
+    author: 'albert_camus',
+    profileImg: 'img/profile/camus.jpg',
     location: 'Mondovi, Algeria',
     description:
-      'Manchmal ist es eine übermenschliche Leistung, weiterzumachen, einfach weiterzumachen.',
+      'Manchmal ist schon allein weiterzumachen, einfach weiterzumachen, eine übermenschliche Leistung.',
     poster: 'img/poster/poster9.jpg',
   },
   {
-    author: 'Sartre',
-    profileImg: 'img/profile/sartre.jpeg',
+    author: 'jp_sartre',
+    profileImg: 'img/profile/sartre.jpg',
     location: 'Paris, France',
-    description: 'Die Hölle, das sind die anderen.',
+    description:
+      'Um den wahren Wert des Lebens zu begreifen, müssen wir es ab und zu riskieren.',
     poster: 'img/poster/poster10.jpg',
   },
 ];
@@ -83,21 +84,21 @@ let suggestions = [
   },
   {
     author: 'Epicurus',
-    profileImg: 'img/profile/epikur.jpeg',
+    profileImg: 'img/profile/epikur.jpg',
     location: 'Samos, Greece',
     description:
       'Gesundheit ist das höchste Gut, die Zufriedenheit das größte Vermögen.',
   },
   {
     author: 'Voltaire',
-    profileImg: 'img/profile/voltaire.jpeg',
+    profileImg: 'img/profile/voltaire.jpg',
     location: 'Paris, France',
     description:
       'Ich mag verdammen, was du sagst, aber ich werde mein Leben dafür einsetzen, dass du es sagen darfst.',
   },
   {
     author: 'Kierkegaard',
-    profileImg: 'img/profile/kierkegaard.jpeg',
+    profileImg: 'img/profile/kierkegaard.jpg',
     location: 'Copenhagen, Denmark',
     description:
       'Das Leben kann nur rückwärts verstanden, aber nur vorwärts gelebt werden.',
@@ -108,13 +109,13 @@ let suggestions = [
 let stories = [
   {
     author: 'Rousseau',
-    profileImg: 'img/profile/rousseau.jpeg',
+    profileImg: 'img/profile/rousseau.jpg',
     location: 'Geneva, Switzerland',
     description: 'Der Mensch ist frei geboren, und überall liegt er in Ketten.',
   },
   {
     author: 'Confucius',
-    profileImg: 'img/profile/confucius.jpeg',
+    profileImg: 'img/profile/confucius.jpg',
     location: 'Qufu, China',
     description:
       'Unser größter Ruhm ist nicht, niemals zu fallen, sondern jedes Mal aufzustehen, wenn wir fallen.',
@@ -128,7 +129,7 @@ let stories = [
   },
   {
     author: 'Thales',
-    profileImg: 'img/profile/thales.jpeg',
+    profileImg: 'img/profile/thales.jpg',
     location: 'Miletus, Greece',
     description: 'Alles ist voller Götter.',
   },
@@ -149,10 +150,11 @@ let stories = [
 const pinboard = document.getElementById('pinboard');
 
 function render() {
+  pinboard.innerHTML = '';
+
   for (let i = 0; i < cards.length; i++) {
     const cardElement = cards[i];
 
-    pinboard.innerHTML = '';
     pinboard.innerHTML += renderCard(cardElement, i);
   }
 }
@@ -165,15 +167,18 @@ function renderCard(cardElement, i) {
               <img
                 class="card-header-author--img"
                 src="${cardElement['profileImg']}" />
-              <p class="author">Wittgenstein</p>
+              <p class="author">${cardElement['author']}</p>
+            </div>
+            <a class="card-header__svg" href="#">
+              <img src="img/icons/extend.svg"/> 
+            </a>
             
-            <a class="card-header__svg" href="#"
-              ><img src="img/icons/extend.svg" alt="more actions"
-            /></a>
           </div>
+
           <div class="card-poster">
             <img src="${cardElement['poster']}"/>
           </div>
+
           <div class="social-actions">
             <div class="icons-inline">
               <a href="#"><img src="img/icons/heart.svg" alt="" /></a>
@@ -184,16 +189,15 @@ function renderCard(cardElement, i) {
               <a href="#"><img src="img/icons/bookmark.svg" alt="" /></a>
             </div>
           </div>
+
           <div class="comment-section">
             <p class="like-counter">1234 likes</p>
 
             <div class="author-commentary">
-              <div class="author-commentary--author"><p>Wittgenstein</p></div>
-              <div class="author-commentary--comment">
-                <p>
-                  ${cardElement['description']}
-                </p>
-              </div>
+              <p>
+                <span class="author-commentary--author">${cardElement['author']}</span>
+                <span class="author-commentary--comment">${cardElement['description']}</span>
+              </p>
             </div>
 
             <p class="all-comments greyed">View all 52 comments</p>
