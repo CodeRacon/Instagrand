@@ -9,7 +9,10 @@
     <script defer src="script.js"></script>
     <title>Instagrand</title>
   </head>
-  <body onload="render()">
+  <body onload="renderPage()">
+    <!-- ########## -->
+    <!-- * HEADER * -->
+    <!-- ########## -->
     <header>
       <div class="top-bar">
         <a href="index.html"> <h1>Instagrand</h1></a>
@@ -20,20 +23,27 @@
           <img src="img/icons/add.svg" alt="add-icon" />
           <img src="img/icons/compass.svg" alt="compass-icon" />
           <img src="img/icons/heart.svg" alt="heart-icon" />
-          <img src="img/profile.jpg" alt="profile" id="profile-img" />
+          <img src="img/myprofile.jpg" alt="profile" id="profile-img" />
         </div>
       </div>
     </header>
     <div></div>
-
+    <!-- ######## -->
+    <!-- * MAIN * -->
+    <!-- ######## -->
     <main>
       <div class="pinboard" id="pinboard">
         <!-- html-code injected by js via render() -->
       </div>
+      <!-- ######### -->
+      <!-- * ASIDE * -->
+      <!-- ######### -->
       <aside>
+        <!-- html-code injected by js via render() -->
+
         <div class="flex-spread wrapper">
           <div class="myprofile">
-            <img src="img/profile.jpg" alt="" class="myprofile__img" />
+            <img src="img/myprofile.jpg" alt="" class="myprofile__img" />
             <div class="my-info-box">
               <p class="myusername">coderacon</p>
               <p class="myrealname">Michael Buschmann</p>
@@ -41,42 +51,47 @@
           </div>
           <a href="#" class="switch-btn">Switch</a>
         </div>
-
-        <div class="suggestion-section">
-          <div class="suggestions-header">
-            <h4>stories</h4>
-            <a href="#"
-              ><h4><span>watch all</span></h4></a
-            >
-          </div>
-          <div class="suggested">
-            <div class="user-info-box">
-              <img
-                src="img/profile/kierkegaard.jpg"
-                alt=""
-                class="suggested-profile__img" />
-              <div class="username-and-update">
-                <p class="user">kirkegaard</p>
-                <p class="update greyed">2 HOURS AGO</p>
-              </div>
-            </div>
-            <a href="#" class="follow-btn">Follow</a>
-          </div>
-        </div>
         <div class="story-section">
           <div class="stories-header">
-            <h4>suggestions</h4>
+            <h4>stories</h4>
             <a href="#"
               ><h4><span>see all</span></h4></a
             >
           </div>
-          <div class="story">
-            <img
-              src="img/profile/camus.jpg"
-              alt=""
-              class="story-profile__img" />
-            <div class="suggested-user">
-              <p class="user">albertcamus</p>
+          <div class="stories-container" id="stories-cont">
+            <div class="story">
+              <img
+                src="img/profile/camus.jpg"
+                alt=""
+                class="story-profile__img" />
+              <div class="suggested-user">
+                <div class="username-and-update">
+                  <p class="user">albertcamus</p>
+                  <p class="update greyed">2 HOURS AGO</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="suggestion-section">
+          <div class="suggestions-header">
+            <h4>suggestions</h4>
+            <a href="#"
+              ><h4><span>watch all</span></h4></a
+            >
+          </div>
+          <div class="suggested-container" id="suggested-cont">
+            <div class="suggested">
+              <div class="user-info-box">
+                <img
+                  src="img/profile/kierkegaard.jpg"
+                  alt=""
+                  class="suggested-profile__img" />
+
+                <p class="user">kirkegaard</p>
+              </div>
+              <a href="#" class="follow-btn">Follow</a>
             </div>
           </div>
         </div>

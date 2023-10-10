@@ -74,6 +74,47 @@ let cards = [
   },
 ];
 
+let stories = [
+  {
+    author: 'Rousseau',
+    profileImg: 'img/profile/rousseau.jpg',
+    location: 'Geneva, Switzerland',
+    description: 'Der Mensch ist frei geboren, und überall liegt er in Ketten.',
+  },
+  {
+    author: 'Confucius',
+    profileImg: 'img/profile/confucius.jpg',
+    location: 'Qufu, China',
+    description:
+      'Unser größter Ruhm ist nicht, niemals zu fallen, sondern jedes Mal aufzustehen, wenn wir fallen.',
+  },
+  {
+    author: 'Hannah Arendt',
+    profileImg: 'img/profile/arendt.jpg',
+    location: 'Linden, Germany',
+    description:
+      'Die Freiheit ist die Fähigkeit, zu sagen, was gesagt werden sollte.',
+  },
+  {
+    author: 'Thales',
+    profileImg: 'img/profile/thales.jpg',
+    location: 'Miletus, Greece',
+    description: 'Alles ist voller Götter.',
+  },
+  {
+    author: 'John Locke',
+    profileImg: 'img/profile/locke.png',
+    location: 'Wrington, England',
+    description: 'Die Vernunft ist der Schlüssel zur Freiheit.',
+  },
+  {
+    author: 'Hume',
+    profileImg: 'img/profile/hume.webp',
+    location: 'Edinburgh, Scotland',
+    description: 'Die Vernunft ist ein Sklave der Leidenschaften.',
+  },
+];
+
 let suggestions = [
   {
     author: 'Spinoza',
@@ -106,60 +147,31 @@ let suggestions = [
   },
 ];
 
-let stories = [
-  {
-    author: 'Rousseau',
-    profileImg: 'img/profile/rousseau.jpg',
-    location: 'Geneva, Switzerland',
-    description: 'Der Mensch ist frei geboren, und überall liegt er in Ketten.',
-  },
-  {
-    author: 'Confucius',
-    profileImg: 'img/profile/confucius.jpg',
-    location: 'Qufu, China',
-    description:
-      'Unser größter Ruhm ist nicht, niemals zu fallen, sondern jedes Mal aufzustehen, wenn wir fallen.',
-  },
-  {
-    author: 'Hannah Arendt',
-    profileImg: 'img/profile/arendt.webp',
-    location: 'Linden, Germany',
-    description:
-      'Die Freiheit ist die Fähigkeit, zu sagen, was gesagt werden sollte.',
-  },
-  {
-    author: 'Thales',
-    profileImg: 'img/profile/thales.jpg',
-    location: 'Miletus, Greece',
-    description: 'Alles ist voller Götter.',
-  },
-  {
-    author: 'John Locke',
-    profileImg: 'img/profile/locke.png',
-    location: 'Wrington, England',
-    description: 'Die Vernunft ist der Schlüssel zur Freiheit.',
-  },
-  {
-    author: 'Hume',
-    profileImg: 'img/profile/hume.webp',
-    location: 'Edinburgh, Scotland',
-    description: 'Die Vernunft ist ein Sklave der Leidenschaften.',
-  },
-];
+let users = [];
 
 const pinboard = document.getElementById('pinboard');
 
-function render() {
+const storyCont = document.getElementById('stories-cont');
+storyCont.innerHTML = generateStoryHTML();
+
+const suggestedCont = document.getElementById('suggested-cont');
+suggestedCont.innerHTML = generateSuggestionsHTML();
+
+function renderPage() {
+  renderPinboard();
+}
+
+function renderPinboard() {
   pinboard.innerHTML = '';
 
   for (let i = 0; i < cards.length; i++) {
     const cardElement = cards[i];
 
-    pinboard.innerHTML += renderCard(cardElement, i);
+    pinboard.innerHTML += renderCard(cardElement);
   }
 }
 
-function renderCard(cardElement, i) {
+function renderCard(cardElement) {
   return /*html*/ `
     <div class="card" id="card">
           <div class="card-header">
@@ -216,4 +228,45 @@ function renderCard(cardElement, i) {
           </div>
         </div>
   `;
+}
+
+function generateStoryHTML() {
+  let storyHTML = '';
+
+  for (let i = 0; i < stories.length; i++) {
+    const storyElement = stories[i];
+
+    storyHTML += /*html*/ `
+      <div class="story">
+        <img src="${storyElement['profileImg']}" alt="" class="story-profile__img" />
+        <div class="suggested-user">
+          <div class="username-and-update">
+            <p class="user">${storyElement['author']}</p>
+            <p class="update greyed">2 HOURS AGO</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  return storyHTML;
+}
+
+function generateSuggestionsHTML() {
+  let suggestionsHTML = '';
+
+  for (let i = 0; i < suggestions.length; i++) {
+    const suggestElement = suggestions[i];
+    suggestionsHTML += /*html*/ `
+      <div class="suggested">
+        <div class="user-info-box">
+          <img src="${suggestElement['profileImg']}" alt="" class="suggested-profile__img" />
+          <p class="user">${suggestElement['author']}</p>
+        </div>
+        <a href="#" class="follow-btn">Follow</a>
+      </div>
+    `;
+  }
+
+  return suggestionsHTML;
 }
