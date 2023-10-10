@@ -103,13 +103,13 @@ let stories = [
   },
   {
     author: 'John Locke',
-    profileImg: 'img/profile/locke.png',
+    profileImg: 'img/profile/locke.jpg',
     location: 'Wrington, England',
     description: 'Die Vernunft ist der Schlüssel zur Freiheit.',
   },
   {
     author: 'Hume',
-    profileImg: 'img/profile/hume.webp',
+    profileImg: 'img/profile/hume.jpg',
     location: 'Edinburgh, Scotland',
     description: 'Die Vernunft ist ein Sklave der Leidenschaften.',
   },
@@ -118,7 +118,7 @@ let stories = [
 let suggestions = [
   {
     author: 'Spinoza',
-    profileImg: 'img/profile/spinoza.webp',
+    profileImg: 'img/profile/spinoza.jpg',
     location: 'Amsterdam, Netherlands',
     description:
       'Freiheit besteht nicht darin, seine Wünsche zu befriedigen, sondern in der Fähigkeit, seine Begierden zu kontrollieren.',
