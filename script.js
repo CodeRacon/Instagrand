@@ -5,6 +5,8 @@ let cards = [
     location: 'Vienna, Austria',
     description: 'Worüber man nicht sprechen kann, darüber muss man schweigen.',
     poster: 'img/poster/poster1.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'georg_w_hegel',
@@ -12,6 +14,8 @@ let cards = [
     location: 'Ingolstadt, Germany',
     description: 'Die Vernunft ist das höchste Gut des Menschen.',
     poster: 'img/poster/poster2.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'platonsuperbrain',
@@ -19,6 +23,8 @@ let cards = [
     location: 'Athen, Greece',
     description: 'Die Ideen sind die wahren Realitäten.',
     poster: 'img/poster/poster3.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'e_kant',
@@ -27,6 +33,8 @@ let cards = [
     description:
       'Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.',
     poster: 'img/poster/poster4.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'aristoteles',
@@ -34,6 +42,8 @@ let cards = [
     location: 'Stagira, Greece',
     description: 'Die Tugend liegt in der Mitte.',
     poster: 'img/poster/poster5.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'nietzsche_is_the_name',
@@ -41,6 +51,8 @@ let cards = [
     location: 'Röcken, Germany',
     description: 'Gott ist tot.',
     poster: 'img/poster/poster6.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'sokrates_so_be_it',
@@ -48,6 +60,8 @@ let cards = [
     location: 'Athen, Greece',
     description: 'Das einzig wahre Wissen ist, dass man nichts weiß.',
     poster: 'img/poster/poster7.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'descartes',
@@ -55,6 +69,8 @@ let cards = [
     location: 'La Haye en Touraine, France',
     description: 'Ich denke, also bin ich.',
     poster: 'img/poster/poster8.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'albert_camus',
@@ -63,6 +79,8 @@ let cards = [
     description:
       'Manchmal ist schon allein weiterzumachen, einfach weiterzumachen, eine übermenschliche Leistung.',
     poster: 'img/poster/poster9.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
   {
     author: 'jp_sartre',
@@ -71,6 +89,8 @@ let cards = [
     description:
       'Um den wahren Wert des Lebens zu begreifen, müssen wir es ab und zu riskieren.',
     poster: 'img/poster/poster10.jpg',
+    comments: [],
+    commentAuthor: 'guest_account',
   },
 ];
 
@@ -143,16 +163,6 @@ let suggestions = [
     location: 'Copenhagen, Denmark',
     description:
       'Das Leben kann nur rückwärts verstanden, aber nur vorwärts gelebt werden.',
-    poster: '',
-  },
-];
-
-let users = [
-  {
-    author: '',
-    profileImg: 'img/icons/profile.svg',
-    comment: '',
-    like: 'false',
   },
 ];
 
@@ -164,6 +174,29 @@ storyCont.innerHTML = generateStoryHTML();
 const suggestedCont = document.getElementById('suggested-cont');
 suggestedCont.innerHTML = generateSuggestionsHTML();
 
+// Funktion zum Speichern der Daten im Local Storage
+function save() {
+  // Daten in einen JSON-String konvertieren
+  const data = JSON.stringify(cards);
+
+  // Im Local Storage speichern
+  localStorage.setItem('cardsData', data);
+}
+
+// Funktion zum Laden der Daten aus dem Local Storage
+function load() {
+  // Daten aus dem Local Storage abrufen
+  const data = localStorage.getItem('cardsData');
+
+  // Überprüfen, ob Daten vorhanden sind
+  if (data) {
+    // Daten von JSON-String in ein JavaScript-Objekt konvertieren
+    cards = JSON.parse(data);
+  }
+}
+
+load();
+
 function renderPage() {
   renderPinboard();
 }
@@ -172,13 +205,18 @@ function renderPinboard() {
   pinboard.innerHTML = '';
 
   for (let i = 0; i < cards.length; i++) {
+    cards[i].index = i;
+  }
+
+  for (let i = 0; i < cards.length; i++) {
     const cardElement = cards[i];
 
-    pinboard.innerHTML += renderCard(cardElement);
+    pinboard.innerHTML += renderCard(cardElement, i);
+    renderUserComment(i);
   }
 }
 
-function renderCard(cardElement) {
+function renderCard(cardElement, i) {
   return /*html*/ `
         <div class="card" id="card">
           <div class="card-header">
@@ -220,41 +258,31 @@ function renderCard(cardElement) {
             </div>
 
             <p class="all-comments greyed">View all 52 comments</p>
-            <div class="user-commentary">
-              <div class="user-commentary--user">silentbob</div>
-              <div class="user-commentary--comment">Fair enough!</div>
-            </div>
 
-            <div class="like-btn">
-              <svg onclick="toggleHeart()" viewBox="0 0 256 256">
-                <path
-                  fill="#6a6a6a"
-                  d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
-              </svg>
-            </div>
-            
-
+            <div 
+              class="user-commentary"
+              id="user-commentary${i}">
+                
+              <!-- content injected via renderUserComments() -->
+           
+            </div>                   
           </div>
 
           <div class="post-container">
-              <div class="input-bar">
-                <input
-                  class="comment-input"
-                  id="comment"
-                  type="text"
-                  placeholder="add a comment..."
-                  autocomplete="off" />
-                <button 
-                  class="post-btn" 
-                  onclick="addPost()" 
-                  type="button">Post
-                </button>
-              </div>
-              
-              <div id="newpost">
-                <!-- innerHTML -->
-              </div>
-            </div>
+            <div class="input-bar">
+              <input
+                class="comment-input"
+                id="comment${i}"
+                type="text"
+                placeholder="add a comment..."
+                autocomplete="off" />
+              <button 
+                class="post-btn" 
+                onclick="addPost(${i})" 
+                type="button">Post
+              </button>
+            </div>                           
+          </div>
 
         </div>
   `;
@@ -299,4 +327,55 @@ function generateSuggestionsHTML() {
   }
 
   return suggestionsHTML;
+}
+
+function addPost(i) {
+  const commentInput = document.getElementById(`comment${i}`);
+  const commentText = commentInput.value;
+
+  if (commentText !== '') {
+    cards[i].comments.push(commentText);
+    commentInput.value = '';
+    save();
+    renderPage(); // Seite erneut rendern, um die Kommentare anzuzeigen
+    renderUserComment(i);
+  }
+}
+
+function renderUserComment(i) {
+  const userComments = document.getElementById(`user-commentary${i}`);
+
+  if (userComments) {
+    console.log(`User comments element found for card ${i}`);
+    if (cards[i].comments.length > 0) {
+      userComments.innerHTML = '';
+
+      for (let j = 0; j < cards[i].comments.length; j++) {
+        console.log(`Rendering comment ${j} for card ${i}`);
+        userComments.innerHTML += /*html*/ `
+        <div class="user-comment-container">
+          <div class="user-comment" >
+          <p  >
+            <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
+            <span class="user-commentary--comment">${cards[i].comments[j]}</span>
+          </p>   
+          </div>
+          <div class="like-btn">
+            <svg onclick="toggleHeart()" viewBox="0 0 256 256">
+              <path
+                fill="#6a6a6a"
+                d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
+            </svg>
+          </div>   
+        </div>  
+
+          `;
+      }
+    } else {
+      console.log(`No comments for card ${i}`);
+      userComments.classList.add('d-none');
+    }
+  } else {
+    console.log(`User comments element not found for card ${i}`);
+  }
 }
