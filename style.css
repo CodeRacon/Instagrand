@@ -156,7 +156,7 @@ main {
   margin-left: auto;
   margin-right: auto;
   min-height: calc(100vh - 5rem);
-  padding: 2rem 8rem;
+  padding: 2rem 8rem 1rem;
   display: flex;
   align-items: start;
   gap: 2rem;
@@ -289,6 +289,9 @@ main {
 }
 
 .all-comments {
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  width: auto;
 }
 
 .greyed {
@@ -340,16 +343,17 @@ main {
   height: 1.75rem;
   font-size: 1rem;
   font-weight: 500;
-  text-align: center;
+  text-align: right;
   color: #117460;
   border: none;
   background-color: transparent;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .post-btn:hover {
   /* color: #0cdbc0; */
   text-shadow: rgba(7, 101, 89, 0.25) 0px 0px 8px;
+  padding-right: 0.25rem;
 }
 
 /* 
@@ -412,19 +416,69 @@ aside {
 .suggestion-section {
   display: flex;
   flex-direction: column;
-  height: 13.5rem;
-  max-height: calc((100vh - 5rem - 2rem - 3.75rem - 5rem) / 2);
+  height: fit-content;
   border-radius: 0.5rem;
   background-color: #dbe4d9;
   box-shadow: 2px 2px 8px rgba(18, 44, 38, 0.35);
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
+  transition: all 0.3s ease;
 }
 
 .stories-container,
 .suggested-container {
   padding: 0.25rem;
+  overflow: hidden;
+}
+
+.scroll {
   overflow: auto;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+@keyframes fold {
+  to {
+    height: 2.75rem;
+  }
+}
+
+@keyframes unfold {
+  to {
+    max-height: 25.25rem;
+  }
+}
+
+@keyframes defaultHeight {
+  to {
+    max-height: 14rem;
+  }
+}
+
+.fold {
+  animation: 0.3s fold ease;
+}
+
+.unfold {
+  animation: 0.3s unfold ease;
+}
+
+.default {
+  animation: 0.3s defaultHeight ease;
+}
+
+.folded {
+  height: 2.75rem !important;
+}
+
+.unfolded {
+  max-height: 25.25rem;
+}
+
+.default-height {
+  max-height: 14rem;
 }
 
 .suggestions-header,
@@ -439,13 +493,20 @@ aside {
 .stories-header span,
 .suggestions-header span {
   color: #000;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.stories-header span:hover,
+.suggestions-header span:hover {
+  padding-right: 0.25rem;
 }
 
 .suggested {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.125rem;
 }
 
 .suggested-profile__img {
@@ -482,19 +543,29 @@ aside {
 .story {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.125rem;
 }
 
 .switch-btn {
   font-weight: 500;
   color: #dbe4d9;
   height: 1rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.switch-btn:hover {
+  padding-right: 0.25rem;
 }
 
 .follow-btn {
   font-weight: 500;
   color: #117460;
   height: 1rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.follow-btn:hover {
+  padding-right: 0.25rem;
 }
 
 .flex-spread {

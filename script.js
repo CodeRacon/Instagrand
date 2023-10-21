@@ -174,7 +174,7 @@ storyCont.innerHTML = generateStoryHTML();
 const suggestedCont = document.getElementById('suggested-cont');
 suggestedCont.innerHTML = generateSuggestionsHTML();
 
-// Funktion zum Speichern der Daten im Local Storage
+// Funktion zum Speichern der Daten in den Local Storage
 function save() {
   // Daten in einen JSON-String konvertieren
   const data = JSON.stringify(cards);
@@ -217,6 +217,7 @@ function renderPinboard() {
 }
 
 function renderCard(cardElement, i) {
+  const commentCount = getCommentCount(i);
   return /*html*/ `
         <div class="card" id="card">
           <div class="card-header">
@@ -257,8 +258,9 @@ function renderCard(cardElement, i) {
               </p>
             </div>
 
-            <p class="all-comments greyed">View all 52 comments</p>
-
+            <div id="comment-count-container${i}" onclick="toggleAllComments(${i})" >
+              
+            </div>
             <div 
               class="user-commentary"
               id="user-commentary${i}">
@@ -278,7 +280,7 @@ function renderCard(cardElement, i) {
                 autocomplete="off" />
               <button 
                 class="post-btn" 
-                onclick="addPost(${i})" 
+                onclick="postComment(${i})" 
                 type="button">Post
               </button>
             </div>                           
@@ -329,7 +331,7 @@ function generateSuggestionsHTML() {
   return suggestionsHTML;
 }
 
-function addPost(i) {
+function postComment(i) {
   const commentInput = document.getElementById(`comment${i}`);
   const commentText = commentInput.value;
 
@@ -342,40 +344,242 @@ function addPost(i) {
   }
 }
 
+// function renderUserComment(i) {
+//   const userComments = document.getElementById(`user-commentary${i}`);
+
+//   if (userComments) {
+//     console.log(`there is/are user-comment(s) found for card ${i}`);
+//     if (cards[i].comments.length > 0) {
+//       userComments.innerHTML = '';
+
+//       for (let j = 0; j < cards[i].comments.length; j++) {
+//         console.log(`rendering comment ${j} on card ${i}`);
+//         userComments.innerHTML += /*html*/ `
+//         <div class="user-comment-container">
+//           <div class="user-comment" >
+//           <p  >
+//             <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
+//             <span class="user-commentary--comment">${cards[i].comments[j]}</span>
+//           </p>
+//           </div>
+//           <div class="like-btn">
+//             <svg onclick="toggleHeart()" viewBox="0 0 256 256">
+//               <path
+//                 fill="#6a6a6a"
+//                 d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
+//             </svg>
+//           </div>
+//         </div>
+
+//           `;
+//       }
+//     } else {
+//       console.log(`there is not user-comment for card ${i}`);
+//       userComments.classList.add('d-none');
+//     }
+//   } else {
+//     console.log(`there is no user-comment for card ${i}`);
+//   }
+// }
+
 function renderUserComment(i) {
   const userComments = document.getElementById(`user-commentary${i}`);
+  const commentCount = cards[i].comments.length;
+  const commentContainer = document.getElementById(
+    `comment-count-container${i}`
+  );
 
   if (userComments) {
-    console.log(`User comments element found for card ${i}`);
-    if (cards[i].comments.length > 0) {
+    if (commentCount > 0) {
       userComments.innerHTML = '';
 
-      for (let j = 0; j < cards[i].comments.length; j++) {
-        console.log(`Rendering comment ${j} for card ${i}`);
+      for (let j = 0; j < Math.min(3, commentCount); j++) {
         userComments.innerHTML += /*html*/ `
-        <div class="user-comment-container">
-          <div class="user-comment" >
-          <p  >
-            <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
-            <span class="user-commentary--comment">${cards[i].comments[j]}</span>
-          </p>   
+          <div class="user-comment-container">
+            <div class="user-comment" >
+              <p  >
+                <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
+                <span class="user-commentary--comment">${cards[i].comments[j]}</span>
+              </p>   
+            </div>
+            <div class="like-btn">
+              <svg viewBox="0 0 256 256">
+                <path
+                  fill="#6a6a6a"
+                  d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
+              </svg>
+            </div>   
           </div>
-          <div class="like-btn">
-            <svg onclick="toggleHeart()" viewBox="0 0 256 256">
-              <path
-                fill="#6a6a6a"
-                d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
-            </svg>
-          </div>   
-        </div>  
+        `;
+      }
 
-          `;
+      if (commentCount >= 4) {
+        commentContainer.classList.remove('d-none');
+        commentContainer.innerHTML = /*html*/ `
+          <span class="all-comments greyed">
+              View all ${commentCount} comments
+          </span>
+        `;
+      } else {
+        commentContainer.classList.add('d-none');
       }
     } else {
-      console.log(`No comments for card ${i}`);
-      userComments.classList.add('d-none');
+      commentContainer.classList.add('d-none');
     }
   } else {
-    console.log(`User comments element not found for card ${i}`);
+    commentContainer.classList.add('d-none');
+  }
+}
+
+function toggleAllComments(i) {
+  const userComments = document.getElementById(`user-commentary${i}`);
+  const commentCount = cards[i].comments.length;
+  const commentContainer = document.getElementById(
+    `comment-count-container${i}`
+  );
+
+  if (userComments) {
+    if (commentContainer.innerText.includes('View all')) {
+      userComments.innerHTML = '';
+      for (let j = 0; j < commentCount; j++) {
+        userComments.innerHTML += /*html*/ `
+          <div class="user-comment-container">
+            <div class="user-comment" >
+              <p>
+                <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
+                <span class="user-commentary--comment">${cards[i].comments[j]}</span>
+              </p>
+            </div>
+            <div class="like-btn">
+              <svg  viewBox="0 0 256 256">
+                <path
+                  fill="#6a6a6a"
+                  d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
+              </svg>
+            </div>   
+          </div>
+        `;
+      }
+      commentContainer.innerHTML = /*html*/ `
+          <span class="all-comments greyed">
+              Show only last 3 comments
+          </span>
+        `;
+      commentContainer.classList.remove('d-none'); // Hinzugefügt, um den Container anzuzeigen
+    } else {
+      userComments.innerHTML = '';
+      for (let j = 0; j < Math.min(3, commentCount); j++) {
+        userComments.innerHTML += /*html*/ `
+          <div class="user-comment-container">
+            <div class="user-comment" >
+              <p>
+                <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
+                <span class="user-commentary--comment">${cards[i].comments[j]}</span>
+              </p>
+            </div>
+            <div class="like-btn">
+              <svg  viewBox="0 0 256 256">
+                <path
+                  fill="#6a6a6a"
+                  d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
+              </svg>
+            </div>   
+          </div>
+        `;
+      }
+      commentContainer.innerHTML = /*html*/ `
+          <span class="all-comments greyed">
+              View all ${commentCount} comments
+          </span>
+        `;
+      commentContainer.classList.remove('d-none'); // Hinzugefügt, um den Container anzuzeigen
+    }
+  }
+}
+
+function getCommentCount(i) {
+  return cards[i].comments.length;
+}
+
+let storySectionExpanded = false;
+let suggestionSectionExpanded = false;
+
+function toggleStorySection() {
+  const storyBox = document.getElementById('stories');
+  const storyHeaderSpan = document.getElementById('storyHeaderSpan');
+  const suggestionBox = document.getElementById('suggestions');
+  const suggestionHeaderSpan = document.getElementById('suggestionHeaderSpan');
+
+  if (!storySectionExpanded) {
+    // Aufklappen der Story-Section
+    storyBox.classList.remove('default-height');
+    storyBox.classList.add('unfolded');
+    storyHeaderSpan.innerHTML = 'show less';
+    storySectionExpanded = true;
+
+    // Einklappen der Suggestion-Section
+    suggestionBox.classList.remove('unfolded');
+    suggestionBox.classList.add('default-height');
+    suggestionHeaderSpan.innerHTML = 'show all';
+    suggestionSectionExpanded = false;
+  } else {
+    // Zurücksetzen in den Default-Modus
+    storyBox.classList.remove('unfolded');
+    storyBox.classList.add('default-height');
+    storyHeaderSpan.innerHTML = 'show all';
+    storySectionExpanded = false;
+  }
+}
+
+function resetStorySection() {
+  const storyBox = document.getElementById('stories');
+  const storyHeaderSpan = document.getElementById('storyHeaderSpan');
+
+  if (storySectionExpanded) {
+    // Zurücksetzen der Story-Section in den Default-Modus
+    storyBox.classList.remove('unfolded');
+    storyBox.classList.add('default-height');
+    storyHeaderSpan.innerHTML = 'show all';
+    storySectionExpanded = false;
+  }
+}
+
+function toggleSuggestionSection() {
+  const suggestionBox = document.getElementById('suggestions');
+  const suggestionHeaderSpan = document.getElementById('suggestionHeaderSpan');
+  const storyBox = document.getElementById('stories');
+  const storyHeaderSpan = document.getElementById('storyHeaderSpan');
+
+  if (!suggestionSectionExpanded) {
+    // Aufklappen der Suggestion-Section
+    suggestionBox.classList.remove('default-height');
+    suggestionBox.classList.add('unfolded');
+    suggestionHeaderSpan.innerHTML = 'show less';
+    suggestionSectionExpanded = true;
+
+    // Einklappen der Story-Section
+    storyBox.classList.remove('unfolded');
+    storyBox.classList.add('default-height');
+    storyHeaderSpan.innerHTML = 'show all';
+    storySectionExpanded = false;
+  } else {
+    // Zurücksetzen in den Default-Modus
+    suggestionBox.classList.remove('unfolded');
+    suggestionBox.classList.add('default-height');
+    suggestionHeaderSpan.innerHTML = 'show all';
+    suggestionSectionExpanded = false;
+  }
+}
+
+function resetSuggestionSection() {
+  const suggestionBox = document.getElementById('suggestions');
+  const suggestionHeaderSpan = document.getElementById('suggestionHeaderSpan');
+
+  if (suggestionSectionExpanded) {
+    // Zurücksetzen der Suggestion-Section in den Default-Modus
+    suggestionBox.classList.remove('unfolded');
+    suggestionBox.classList.add('default-height');
+    suggestionHeaderSpan.innerHTML = 'show all';
+    suggestionSectionExpanded = false;
   }
 }

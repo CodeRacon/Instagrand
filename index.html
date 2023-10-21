@@ -27,7 +27,6 @@
         </div>
       </div>
     </header>
-    <div></div>
     <!-- ######## -->
     <!-- * MAIN * -->
     <!-- ######## -->
@@ -51,26 +50,32 @@
             </div>
             <a href="#" class="switch-btn">Switch</a>
           </div>
-          <div class="story-section">
+          <div class="story-section default-height" id="stories">
             <div class="stories-header">
               <h4>stories</h4>
-              <a href="#"
-                ><h4><span>see all</span></h4></a
-              >
+              <h4>
+                <span id="storyHeaderSpan" onclick="toggleStorySection()"
+                  >show all</span
+                >
+              </h4>
             </div>
             <div class="stories-container" id="stories-cont">
               <!-- html-code injected by js via generateStoryHTML() -->
             </div>
           </div>
 
-          <div class="suggestion-section">
+          <div class="suggestion-section default-height" id="suggestions">
             <div class="suggestions-header">
               <h4>suggestions</h4>
-              <a href="#"
-                ><h4><span>watch all</span></h4></a
-              >
+              <h4>
+                <span
+                  id="suggestionHeaderSpan"
+                  onclick="toggleSuggestionSection()"
+                  >show all</span
+                >
+              </h4>
             </div>
-            <div class="suggested-container" id="suggested-cont">
+            <div class="suggested-container no-scroll" id="suggested-cont">
               <!-- html-code injected by js via generateSuggestionsHTML() -->
             </div>
           </div>
