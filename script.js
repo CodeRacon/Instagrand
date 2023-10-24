@@ -6,8 +6,8 @@ let cards = [
     description: 'Worüber man nicht sprechen kann, darüber muss man schweigen.',
     poster: 'img/poster/poster1.jpg',
     comments: [
-      'Interessantes Zitat!',
-      'Wittgenstein hatte wirklich tiefe Einsichten.',
+      'Wittgenstein Aaalter...üüübelst deep der Typ!',
+      'Interessantes Zitat! Ich verstehs nicht...aber interessant...denk ich mal.',
       'Was bedeutet das für die Sprache?',
       'Ich liebe diese Denkweise.',
       'Gibt es Grenzen für das Sprechen?',
@@ -29,8 +29,8 @@ let cards = [
     description: 'Die Vernunft ist das höchste Gut des Menschen.',
     poster: 'img/poster/poster2.jpg',
     comments: [
-      'Hegel war ein großer Denker.',
-      'Seine Philosophie ist faszinierend.',
+      'Hegel war ein großer Denker...über 1,90m!!!',
+      'Seine Philosophie ist so beeindruckend.',
     ],
     commentAuthor: ['logic_master', 'reasoning_soul'],
     likeStatus: [false, false],
@@ -44,9 +44,10 @@ let cards = [
     poster: 'img/poster/poster3.jpg',
     comments: [
       'Die Ideenwelt ist faszinierend.',
+      'Die Ideenwelt ist von Tschibo ist auch faszinierend! Jede Woche eine neue Welt. Schlauchboote, Wanderschuhe und Arabica-Bohnen.',
       'Was sind für dich wahre Realitäten?',
       'Platons Höhlengleichnis kommt mir in den Sinn.',
-      'Kann man die Ideen erkennen?',
+      'Ich geh auch in die Höhle gleich!',
     ],
     commentAuthor: [
       'idea_seeker',
@@ -65,13 +66,13 @@ let cards = [
       'Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.',
     poster: 'img/poster/poster4.jpg',
     comments: [
-      'Kant und die kategorischen Imperative.',
+      'Jepp...isso!',
+      'Kommando Kant!',
+      'Kant und die kategorischen Imperative. Es fetzt.',
       'Wie bestimmen wir, was moralisch ist?',
       'Seine Ethik hat viele Fragen aufgeworfen.',
       'Moralische Pflichten sind universell.',
-      'Kannst du nach Kants Maximen handeln?',
       'Seine Philosophie prägt die Ethik.',
-      'Jepp...isso!.',
     ],
     commentAuthor: [
       'ethical_thinker',
@@ -93,12 +94,12 @@ let cards = [
     poster: 'img/poster/poster5.jpg',
     comments: [
       'Aristoteles über Tugendhaftigkeit. Sollte man sich mal mit beschäftigen!',
-      'Welche Tugenden sind dir wichtig?',
       'Die goldene Mitte. Da ist so bissl sein Ding.',
+      'Dummes sagen und dummes tun...hält sich bei mir die Waage.',
+      'Welche Tugenden sind dir wichtig?',
       'Was bedeutet es, tugendhaft zu sein?',
       'Wie können wir tugendhafter leben?',
       'Tugend als Weg zur Glückseligkeit. Könnte was dran sein!',
-      'Dummes sagen und dummes tun...hält sich bei mir die Waage.',
     ],
     commentAuthor: [
       'virtuous_soul',
@@ -119,13 +120,13 @@ let cards = [
     description: 'Gott ist tot.',
     poster: 'img/poster/poster6.jpg',
     comments: [
+      'Urin kennt keine Grenzen!',
+      'Geiler Schnurrbart!',
       'Nietzsche und der Nihilismus.',
       'Was bedeutet "Gott ist tot"?',
       'Ist das der Verlust von Werten?',
       'Wie beeinflusst uns das heute?',
       'Nietzsche als radikaler Denker.',
-      'Geiler Schnurrbart!',
-      'Urin kennt keine Grenzen!',
     ],
     commentAuthor: [
       'nihilism_sage',
@@ -147,11 +148,11 @@ let cards = [
     description: 'Das einzig wahre Wissen ist, dass man nichts weiß.',
     poster: 'img/poster/poster7.jpg',
     comments: [
-      'Was bedeutet "Ich weiß, dass ich nichts weiß"?',
+      'Was heißt das jetzt im Klartext? Immer dieses hochtrabende Geschwurbel!!!ELF!!1!',
+      'Das ist mir zu GELB alles!.',
       'Fragen als Weg zur Erkenntnis.',
       'Weisheit durch Selbstzweifel.',
       'Der geborene Philosoph.',
-      'Das ist mir zu gelb alles!.',
     ],
     commentAuthor: [
       'knowledge_humble',
@@ -170,10 +171,10 @@ let cards = [
     description: 'Ich denke, also bin ich.',
     poster: 'img/poster/poster8.jpg',
     comments: [
-      'Wie sicher ist unser Denken?',
-      'Der Beginn der modernen Philosophie.',
-      'Die Suche nach unerschütterlichem Wissen.',
       'Cleveres Kerlchen, der René.',
+      'Der Beginn der modernen Philosophie.',
+      'Wie sicher ist unser Denken?',
+      'Die Suche nach unerschütterlichem Wissen.',
     ],
     commentAuthor: [
       'cogito_believer',
@@ -208,12 +209,12 @@ let cards = [
       'Um den wahren Wert des Lebens zu begreifen, müssen wir es ab und zu riskieren.',
     poster: 'img/poster/poster10.jpg',
     comments: [
+      'Das klingt übelst gefährlich!',
       'Existentialismus und Freiheit!',
       'Was bedeutet es, existenzielle Entscheidungen zu treffen?',
       'Verantwortung für unser Leben übernehmen!',
       'Der Risikofaktor des Seins.',
       'Der existenzielle Mut.',
-      'Das klingt übelst gefährlich!',
     ],
     commentAuthor: [
       'existential_freedom',
@@ -327,6 +328,21 @@ function load() {
     // Daten von JSON-String in ein JavaScript-Objekt konvertieren
     cards = JSON.parse(data);
   }
+
+  // Setzen Sie commentDisplayStatus auf 'limited' standardmäßig
+  cards.forEach((card) => {
+    card.commentDisplayStatus = 'limited';
+  });
+}
+
+// Funktion zum Hinzufügen eines neuen Kommentars
+function addComment(i, author, comment) {
+  // Hinzufügen des Autors und Kommentars zu den entsprechenden Arrays
+  cards[i].commentAuthor.push(author);
+  cards[i].comments.push(comment);
+
+  // Speichern der aktualisierten Daten
+  save();
 }
 
 load();
@@ -359,7 +375,10 @@ function renderCard(cardElement, i) {
               <img
                 class="card-header-author--img"
                 src="${cardElement['profileImg']}" />
-              <p class="author">${cardElement['author']}</p>
+              <div class="author-and-location " >
+                <p class="author">${cardElement['author']}</p>
+                <p class="greyed">${cardElement['location']}</p>
+              </div>
             </div>
             <a class="card-header__svg" href="#">
               <img src="img/icons/extend.svg"/> 
@@ -373,7 +392,12 @@ function renderCard(cardElement, i) {
 
           <div class="social-actions">
             <div class="icons-inline">
-              <a href="#"><img src="img/icons/heart.svg" alt="" /></a>
+              <svg 
+                width="36" 
+                height="36" 
+                viewBox="0 0 256 256">
+                <path fill="currentColor" d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z"/>
+              </svg>
               <a href="#"><img src="img/icons/comment.svg" alt="" /></a>
               <a href="#"><img src="img/icons/share.svg" alt="" /></a>
             </div>
@@ -392,7 +416,7 @@ function renderCard(cardElement, i) {
               </p>
             </div>
 
-            <div id="comment-count-container${i}" onclick="toggleAllComments(${i})" >
+            <div id="comment-count-container${i}"  >
               
             </div>
             <div 
@@ -466,11 +490,18 @@ function generateSuggestionsHTML() {
 }
 
 function postComment(i) {
+  const myUserName = 'code.racon';
   const commentInput = document.getElementById(`comment${i}`);
   const commentText = commentInput.value;
+  const card = cards[i];
+  if (card.commentDisplayStatus === 'limited') {
+    card.commentDisplayStatus = 'full';
+  }
 
   if (commentText !== '') {
     cards[i].comments.push(commentText);
+    cards[i].commentAuthor.push(myUserName);
+
     commentInput.value = '';
     save();
     renderPage(); // Seite erneut rendern, um die Kommentare anzuzeigen
@@ -489,6 +520,7 @@ function likeComment(i, j) {
     // Kommentar wurde noch nicht geliked: likeStatus auf 'true' setzen
     card.likeStatus[j] = true;
   }
+  save();
   // Kommentare neu rendern
   renderUserComment(i);
 }
@@ -505,10 +537,13 @@ function renderUserComment(i) {
   );
 
   if (userComments) {
-    if (commentCount > 0) {
-      userComments.innerHTML = '';
+    userComments.innerHTML = ''; // Leeren Sie den Inhalt zuerst
 
+    if (commentCount > 0) {
       const maxComments = commentDisplayStatus === 'limited' ? 3 : commentCount;
+
+      const displayedCommentAuthors = commentAuthors.slice(0, maxComments);
+      const displayedComments = cards[i].comments.slice(0, maxComments);
 
       for (let j = 0; j < maxComments; j++) {
         const heartPath = likeStatus[j]
@@ -519,8 +554,12 @@ function renderUserComment(i) {
           <div class="user-comment-container">
             <div class="user-comment" >
               <p>
-                <span class="user-commentary--user">${commentAuthors[j]}&nbsp;</span> 
-                <span class="user-commentary--comment">${cards[i].comments[j]}</span>
+                <span class="user-commentary--user">${
+                  displayedCommentAuthors[j] || ''
+                }&nbsp;</span> 
+                <span class="user-commentary--comment">${
+                  displayedComments[j] || ''
+                }</span>
               </p>
             </div>
             <div class="like-btn" onclick="likeComment(${i}, ${j})">
@@ -538,8 +577,12 @@ function renderUserComment(i) {
       if (commentCount >= 4) {
         commentContainer.classList.remove('d-none');
         commentContainer.innerHTML = /*html*/ `
-          <span class="all-comments greyed">
-              View all ${commentCount} comments
+          <span class="all-comments greyed" onclick="toggleAllComments(${i})">
+            ${
+              commentDisplayStatus === 'limited'
+                ? `Show all ${commentCount} comments`
+                : 'Show less'
+            }
           </span>
         `;
       } else {
