@@ -427,7 +427,11 @@ aside {
 
 .stories-container,
 .suggested-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
   padding: 0.25rem;
+
   overflow: hidden;
 }
 
@@ -453,7 +457,7 @@ aside {
 
 @keyframes defaultHeight {
   to {
-    max-height: 14rem;
+    max-height: 11.5rem;
   }
 }
 
@@ -478,7 +482,7 @@ aside {
 }
 
 .default-height {
-  max-height: 14rem;
+  max-height: 10rem;
 }
 
 .suggestions-header,
@@ -506,7 +510,6 @@ aside {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.125rem;
 }
 
 .suggested-profile__img {
@@ -543,7 +546,6 @@ aside {
 .story {
   display: flex;
   align-items: center;
-  margin-bottom: 1.125rem;
 }
 
 .switch-btn {

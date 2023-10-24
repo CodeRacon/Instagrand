@@ -5,8 +5,22 @@ let cards = [
     location: 'Vienna, Austria',
     description: 'Worüber man nicht sprechen kann, darüber muss man schweigen.',
     poster: 'img/poster/poster1.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Interessantes Zitat!',
+      'Wittgenstein hatte wirklich tiefe Einsichten.',
+      'Was bedeutet das für die Sprache?',
+      'Ich liebe diese Denkweise.',
+      'Gibt es Grenzen für das Sprechen?',
+    ],
+    commentAuthor: [
+      'philosophy_lover',
+      'thinker_123',
+      'curious_mind',
+      'word_wanderer',
+      'questioning_life',
+    ],
+    likeStatus: [false, false, false, false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'georg_w_hegel',
@@ -14,8 +28,13 @@ let cards = [
     location: 'Ingolstadt, Germany',
     description: 'Die Vernunft ist das höchste Gut des Menschen.',
     poster: 'img/poster/poster2.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Hegel war ein großer Denker.',
+      'Seine Philosophie ist faszinierend.',
+    ],
+    commentAuthor: ['logic_master', 'reasoning_soul'],
+    likeStatus: [false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'platonsuperbrain',
@@ -23,8 +42,20 @@ let cards = [
     location: 'Athen, Greece',
     description: 'Die Ideen sind die wahren Realitäten.',
     poster: 'img/poster/poster3.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Die Ideenwelt ist faszinierend.',
+      'Was sind für dich wahre Realitäten?',
+      'Platons Höhlengleichnis kommt mir in den Sinn.',
+      'Kann man die Ideen erkennen?',
+    ],
+    commentAuthor: [
+      'idea_seeker',
+      'reality_explorer',
+      'cave_thinker',
+      'idealist_dreamer',
+    ],
+    likeStatus: [false, false, false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'e_kant',
@@ -33,8 +64,26 @@ let cards = [
     description:
       'Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.',
     poster: 'img/poster/poster4.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Kant und die kategorischen Imperative.',
+      'Wie bestimmen wir, was moralisch ist?',
+      'Seine Ethik hat viele Fragen aufgeworfen.',
+      'Moralische Pflichten sind universell.',
+      'Kannst du nach Kants Maximen handeln?',
+      'Seine Philosophie prägt die Ethik.',
+      'Jepp...isso!.',
+    ],
+    commentAuthor: [
+      'ethical_thinker',
+      'moral_philosopher',
+      'categorical_mind',
+      'duty_bound',
+      'universal_morals',
+      'ethical_inquiry',
+      'philosophy_student',
+    ],
+    likeStatus: [false, false, false, false, false, false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'aristoteles',
@@ -42,8 +91,26 @@ let cards = [
     location: 'Stagira, Greece',
     description: 'Die Tugend liegt in der Mitte.',
     poster: 'img/poster/poster5.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Aristoteles über Tugendhaftigkeit. Sollte man sich mal mit beschäftigen!',
+      'Welche Tugenden sind dir wichtig?',
+      'Die goldene Mitte. Da ist so bissl sein Ding.',
+      'Was bedeutet es, tugendhaft zu sein?',
+      'Wie können wir tugendhafter leben?',
+      'Tugend als Weg zur Glückseligkeit. Könnte was dran sein!',
+      'Dummes sagen und dummes tun...hält sich bei mir die Waage.',
+    ],
+    commentAuthor: [
+      'virtuous_soul',
+      'golden_mean',
+      'virtue_seeker',
+      'morally_centered',
+      'happy_virtue',
+      'ethical_balance',
+      'philosophy_student',
+    ],
+    likeStatus: [false, false, false, false, false, false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'nietzsche_is_the_name',
@@ -51,8 +118,27 @@ let cards = [
     location: 'Röcken, Germany',
     description: 'Gott ist tot.',
     poster: 'img/poster/poster6.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Nietzsche und der Nihilismus.',
+      'Was bedeutet "Gott ist tot"?',
+      'Ist das der Verlust von Werten?',
+      'Wie beeinflusst uns das heute?',
+      'Nietzsche als radikaler Denker.',
+      'Geiler Schnurrbart!',
+      'Urin kennt keine Grenzen!',
+    ],
+    commentAuthor: [
+      'nihilism_sage',
+      'godless_mind',
+      'value_loss',
+      'nietzsche_follower',
+      'radical_thought',
+      'power_desire',
+      'idea_seeker',
+      'virtue_seeker',
+    ],
+    likeStatus: [false, false, false, false, false, false, false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'sokrates_so_be_it',
@@ -60,8 +146,22 @@ let cards = [
     location: 'Athen, Greece',
     description: 'Das einzig wahre Wissen ist, dass man nichts weiß.',
     poster: 'img/poster/poster7.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Was bedeutet "Ich weiß, dass ich nichts weiß"?',
+      'Fragen als Weg zur Erkenntnis.',
+      'Weisheit durch Selbstzweifel.',
+      'Der geborene Philosoph.',
+      'Das ist mir zu gelb alles!.',
+    ],
+    commentAuthor: [
+      'knowledge_humble',
+      'questioning_mind',
+      'self_doubt_wisdom',
+      'born_philosopher',
+      'philosophy_student',
+    ],
+    likeStatus: [false, false, false, false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'descartes',
@@ -69,8 +169,20 @@ let cards = [
     location: 'La Haye en Touraine, France',
     description: 'Ich denke, also bin ich.',
     poster: 'img/poster/poster8.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Wie sicher ist unser Denken?',
+      'Der Beginn der modernen Philosophie.',
+      'Die Suche nach unerschütterlichem Wissen.',
+      'Cleveres Kerlchen, der René.',
+    ],
+    commentAuthor: [
+      'cogito_believer',
+      'thinking_certainty',
+      'unshakable_knowledge',
+      'philosophy_student',
+    ],
+    likeStatus: [false, false, false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'albert_camus',
@@ -79,8 +191,14 @@ let cards = [
     description:
       'Manchmal ist schon allein weiterzumachen, einfach weiterzumachen, eine übermenschliche Leistung.',
     poster: 'img/poster/poster9.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Voll deep!',
+      'Schöner Mann!',
+      'Darüber muss ich nachdenken...aber der Mann hat wohl recht.',
+    ],
+    commentAuthor: ['life_meaning', 'heroic_existence', 'meaning_struggle'],
+    likeStatus: [false, false, false],
+    commentDisplayStatus: 'limited',
   },
   {
     author: 'jp_sartre',
@@ -89,8 +207,24 @@ let cards = [
     description:
       'Um den wahren Wert des Lebens zu begreifen, müssen wir es ab und zu riskieren.',
     poster: 'img/poster/poster10.jpg',
-    comments: [],
-    commentAuthor: 'guest_account',
+    comments: [
+      'Existentialismus und Freiheit!',
+      'Was bedeutet es, existenzielle Entscheidungen zu treffen?',
+      'Verantwortung für unser Leben übernehmen!',
+      'Der Risikofaktor des Seins.',
+      'Der existenzielle Mut.',
+      'Das klingt übelst gefährlich!',
+    ],
+    commentAuthor: [
+      'existential_freedom',
+      'life_choices',
+      'individual_freedom',
+      'life_responsibility',
+      'existential_courage',
+      'philosophy_student',
+    ],
+    likeStatus: [false, false, false, false, false, false],
+    commentDisplayStatus: 'limited',
   },
 ];
 
@@ -344,47 +478,28 @@ function postComment(i) {
   }
 }
 
-// function renderUserComment(i) {
-//   const userComments = document.getElementById(`user-commentary${i}`);
+function likeComment(i, j) {
+  const card = cards[i];
 
-//   if (userComments) {
-//     console.log(`there is/are user-comment(s) found for card ${i}`);
-//     if (cards[i].comments.length > 0) {
-//       userComments.innerHTML = '';
-
-//       for (let j = 0; j < cards[i].comments.length; j++) {
-//         console.log(`rendering comment ${j} on card ${i}`);
-//         userComments.innerHTML += /*html*/ `
-//         <div class="user-comment-container">
-//           <div class="user-comment" >
-//           <p  >
-//             <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
-//             <span class="user-commentary--comment">${cards[i].comments[j]}</span>
-//           </p>
-//           </div>
-//           <div class="like-btn">
-//             <svg onclick="toggleHeart()" viewBox="0 0 256 256">
-//               <path
-//                 fill="#6a6a6a"
-//                 d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
-//             </svg>
-//           </div>
-//         </div>
-
-//           `;
-//       }
-//     } else {
-//       console.log(`there is not user-comment for card ${i}`);
-//       userComments.classList.add('d-none');
-//     }
-//   } else {
-//     console.log(`there is no user-comment for card ${i}`);
-//   }
-// }
+  // Überprüfen, ob der Kommentar bereits geliked wurde
+  if (card.likeStatus[j]) {
+    // Kommentar wurde bereits geliked: likeStatus auf 'false' setzen
+    card.likeStatus[j] = false;
+  } else {
+    // Kommentar wurde noch nicht geliked: likeStatus auf 'true' setzen
+    card.likeStatus[j] = true;
+  }
+  // Kommentare neu rendern
+  renderUserComment(i);
+}
 
 function renderUserComment(i) {
   const userComments = document.getElementById(`user-commentary${i}`);
   const commentCount = cards[i].comments.length;
+  const commentAuthors = cards[i].commentAuthor;
+  const likeStatus = cards[i].likeStatus;
+  const commentDisplayStatus = cards[i].commentDisplayStatus;
+
   const commentContainer = document.getElementById(
     `comment-count-container${i}`
   );
@@ -393,20 +508,27 @@ function renderUserComment(i) {
     if (commentCount > 0) {
       userComments.innerHTML = '';
 
-      for (let j = 0; j < Math.min(3, commentCount); j++) {
+      const maxComments = commentDisplayStatus === 'limited' ? 3 : commentCount;
+
+      for (let j = 0; j < maxComments; j++) {
+        const heartPath = likeStatus[j]
+          ? `M240 94c0 70-103.79 126.66-108.21 129a8 8 0 0 1-7.58 0C119.79 220.66 16 164 16 94a62.07 62.07 0 0 1 62-62c20.65 0 38.73 8.88 50 23.89C139.27 40.88 157.35 32 178 32a62.07 62.07 0 0 1 62 62Z`
+          : `M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z`;
+
         userComments.innerHTML += /*html*/ `
           <div class="user-comment-container">
             <div class="user-comment" >
-              <p  >
-                <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
+              <p>
+                <span class="user-commentary--user">${commentAuthors[j]}&nbsp;</span> 
                 <span class="user-commentary--comment">${cards[i].comments[j]}</span>
-              </p>   
+              </p>
             </div>
-            <div class="like-btn">
-              <svg viewBox="0 0 256 256">
+            <div class="like-btn" onclick="likeComment(${i}, ${j})">
+              <svg  viewBox="0 0 256 256">
                 <path
                   fill="#6a6a6a"
-                  d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
+                  d="${heartPath}"
+                />
               </svg>
             </div>   
           </div>
@@ -432,69 +554,13 @@ function renderUserComment(i) {
 }
 
 function toggleAllComments(i) {
-  const userComments = document.getElementById(`user-commentary${i}`);
-  const commentCount = cards[i].comments.length;
-  const commentContainer = document.getElementById(
-    `comment-count-container${i}`
-  );
-
-  if (userComments) {
-    if (commentContainer.innerText.includes('View all')) {
-      userComments.innerHTML = '';
-      for (let j = 0; j < commentCount; j++) {
-        userComments.innerHTML += /*html*/ `
-          <div class="user-comment-container">
-            <div class="user-comment" >
-              <p>
-                <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
-                <span class="user-commentary--comment">${cards[i].comments[j]}</span>
-              </p>
-            </div>
-            <div class="like-btn">
-              <svg  viewBox="0 0 256 256">
-                <path
-                  fill="#6a6a6a"
-                  d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
-              </svg>
-            </div>   
-          </div>
-        `;
-      }
-      commentContainer.innerHTML = /*html*/ `
-          <span class="all-comments greyed">
-              Show only last 3 comments
-          </span>
-        `;
-      commentContainer.classList.remove('d-none'); // Hinzugefügt, um den Container anzuzeigen
-    } else {
-      userComments.innerHTML = '';
-      for (let j = 0; j < Math.min(3, commentCount); j++) {
-        userComments.innerHTML += /*html*/ `
-          <div class="user-comment-container">
-            <div class="user-comment" >
-              <p>
-                <span class="user-commentary--user">${cards[i].commentAuthor}&nbsp;</span>
-                <span class="user-commentary--comment">${cards[i].comments[j]}</span>
-              </p>
-            </div>
-            <div class="like-btn">
-              <svg  viewBox="0 0 256 256">
-                <path
-                  fill="#6a6a6a"
-                  d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z" />
-              </svg>
-            </div>   
-          </div>
-        `;
-      }
-      commentContainer.innerHTML = /*html*/ `
-          <span class="all-comments greyed">
-              View all ${commentCount} comments
-          </span>
-        `;
-      commentContainer.classList.remove('d-none'); // Hinzugefügt, um den Container anzuzeigen
-    }
+  const card = cards[i];
+  if (card.commentDisplayStatus === 'limited') {
+    card.commentDisplayStatus = 'full';
+  } else {
+    card.commentDisplayStatus = 'limited';
   }
+  renderUserComment(i);
 }
 
 function getCommentCount(i) {
