@@ -237,11 +237,28 @@ let stories = [
     description: 'Der Mensch ist frei geboren, und überall liegt er in Ketten.',
   },
   {
+    author: 'Voltaire',
+    profileImg: 'img/profile/voltaire.jpg',
+    location: 'Paris, France',
+    description:
+      'Ich mag verdammen, was du sagst, aber ich werde mein Leben dafür einsetzen, dass du es sagen darfst.',
+  },
+  {
     author: 'Confucius',
     profileImg: 'img/profile/confucius.jpg',
     location: 'Qufu, China',
     description:
       'Unser größter Ruhm ist nicht, niemals zu fallen, sondern jedes Mal aufzustehen, wenn wir fallen.',
+  },
+];
+
+let suggestions = [
+  {
+    author: 'Spinoza',
+    profileImg: 'img/profile/spinoza.jpg',
+    location: 'Amsterdam, Netherlands',
+    description:
+      'Freiheit besteht nicht darin, seine Wünsche zu befriedigen, sondern in der Fähigkeit, seine Begierden zu kontrollieren.',
   },
   {
     author: 'Hannah Arendt',
@@ -268,16 +285,6 @@ let stories = [
     location: 'Edinburgh, Scotland',
     description: 'Die Vernunft ist ein Sklave der Leidenschaften.',
   },
-];
-
-let suggestions = [
-  {
-    author: 'Spinoza',
-    profileImg: 'img/profile/spinoza.jpg',
-    location: 'Amsterdam, Netherlands',
-    description:
-      'Freiheit besteht nicht darin, seine Wünsche zu befriedigen, sondern in der Fähigkeit, seine Begierden zu kontrollieren.',
-  },
   {
     author: 'Epicurus',
     profileImg: 'img/profile/epikur.jpg',
@@ -285,13 +292,7 @@ let suggestions = [
     description:
       'Gesundheit ist das höchste Gut, die Zufriedenheit das größte Vermögen.',
   },
-  {
-    author: 'Voltaire',
-    profileImg: 'img/profile/voltaire.jpg',
-    location: 'Paris, France',
-    description:
-      'Ich mag verdammen, was du sagst, aber ich werde mein Leben dafür einsetzen, dass du es sagen darfst.',
-  },
+
   {
     author: 'Kierkegaard',
     profileImg: 'img/profile/kierkegaard.jpg',
@@ -301,39 +302,43 @@ let suggestions = [
   },
 ];
 
-const pinboard = document.getElementById('pinboard');
-
-const storyCont = document.getElementById('stories-cont');
-storyCont.innerHTML = generateStoryHTML();
-
-const suggestedCont = document.getElementById('suggested-cont');
-suggestedCont.innerHTML = generateSuggestionsHTML();
-
-// Funktion zum Speichern der Daten in den Local Storage
 function save() {
-  // Daten in einen JSON-String konvertieren
   const data = JSON.stringify(cards);
 
-  // Im Local Storage speichern
   localStorage.setItem('cardsData', data);
+
+  const storiesData = JSON.stringify(stories);
+  localStorage.setItem('storiesData', storiesData);
+
+  const suggestionsData = JSON.stringify(suggestions);
+  localStorage.setItem('suggestionsData', suggestionsData);
 }
 
-// Funktion zum Laden der Daten aus dem Local Storage
 function load() {
-  // Daten aus dem Local Storage abrufen
   const data = localStorage.getItem('cardsData');
 
-  // Überprüfen, ob Daten vorhanden sind
   if (data) {
-    // Daten von JSON-String in ein JavaScript-Objekt konvertieren
     cards = JSON.parse(data);
   }
 
-  // Setzen Sie commentDisplayStatus auf 'limited' standardmäßig
   cards.forEach((card) => {
     card.commentDisplayStatus = 'limited';
   });
+
+  const storiesData = localStorage.getItem('storiesData');
+  if (storiesData) {
+    stories = JSON.parse(storiesData);
+  }
+  console.log('Loaded stories:', stories);
+
+  const suggestionsData = localStorage.getItem('suggestionsData');
+  if (suggestionsData) {
+    suggestions = JSON.parse(suggestionsData);
+  }
+  console.log('Loaded suggestions:', suggestions);
 }
+
+// load();
 
 // Funktion zum Hinzufügen eines neuen Kommentars
 function addComment(i, author, comment) {
@@ -345,13 +350,19 @@ function addComment(i, author, comment) {
   save();
 }
 
-load();
-
 function renderPage() {
+  const suggestedCont = document.getElementById('suggested-cont');
+  suggestedCont.innerHTML = generateSuggestionsHTML();
+
+  const storyCont = document.getElementById('stories-cont');
+  storyCont.innerHTML = generateStoryHTML();
+
   renderPinboard();
 }
 
 function renderPinboard() {
+  const pinboard = document.getElementById('pinboard');
+
   pinboard.innerHTML = '';
 
   for (let i = 0; i < cards.length; i++) {
@@ -460,7 +471,7 @@ function generateStoryHTML() {
         <div class="suggested-user">
           <div class="username-and-update">
             <p class="user">${storyElement['author']}</p>
-            <p class="update greyed">2 HOURS AGO</p>
+            <p class="update greyed">some time ago</p>
           </div>
         </div>
       </div>
@@ -470,23 +481,81 @@ function generateStoryHTML() {
   return storyHTML;
 }
 
+// function generateSuggestionsHTML() {
+//   let suggestionsHTML = '';
+
+//   for (let i = 0; i < suggestions.length; i++) {
+//     const suggestElement = suggestions[i];
+//     suggestionsHTML += /*html*/ `
+//       <div class="suggested">
+//         <div class="user-info-box">
+//           <img src="${suggestElement['profileImg']}" alt="" class="suggested-profile__img" />
+//           <p class="user">${suggestElement['author']}</p>
+//         </div>
+//         <p onclick="followUser(${i})" class="follow-btn">Follow</p>
+
+//       </div>
+//     `;
+//   }
+//   return suggestionsHTML;
+// }
+
+// Fügen Sie diese Funktion hinzu, um den HTML-Inhalt für Vorschläge zu generieren
+
 function generateSuggestionsHTML() {
+  const suggestionHeaderSpan = document.getElementById('suggestionHeaderSpan');
+  const isMinimumSuggestions = suggestions.length <= 2;
+  suggestionHeaderSpan.innerHTML = isMinimumSuggestions ? '' : 'show all';
+
   let suggestionsHTML = '';
 
-  for (let i = 0; i < suggestions.length; i++) {
-    const suggestElement = suggestions[i];
-    suggestionsHTML += /*html*/ `
+  if (suggestions.length === 0) {
+    // Wenn das suggestions-Array leer ist, zeige eine Nachricht
+    suggestionsHTML = /*html*/ `
       <div class="suggested">
-        <div class="user-info-box">
-          <img src="${suggestElement['profileImg']}" alt="" class="suggested-profile__img" />
-          <p class="user">${suggestElement['author']}</p>
-        </div>
-        <a href="#" class="follow-btn">Follow</a>
+        <p class="notice">No more suggestions yet</p>
       </div>
     `;
+  } else {
+    // Andernfalls generiere den normalen HTML-Inhalt
+    for (let i = 0; i < suggestions.length; i++) {
+      const suggestElement = suggestions[i];
+      suggestionsHTML += /*html*/ `
+        <div class="suggested">
+          <div class="user-info-box">
+            <img src="${suggestElement['profileImg']}" alt="" class="suggested-profile__img" />
+            <p class="user">${suggestElement['author']}</p>
+          </div>
+          <p onclick="followUser(${i})" class="follow-btn">Follow</p>
+        </div>
+      `;
+    }
   }
 
+  // Fügen Sie diesen Event-Listener hinzu, um die Änderungen im suggestions-Array zu überwachen
+  document.addEventListener('DOMContentLoaded', function () {
+    // Hier überprüfen, ob das suggestions-Array leer ist und entsprechend reagieren
+    if (suggestions.length === 0) {
+      const suggestedCont = document.getElementById('suggested-cont');
+      suggestedCont.innerHTML = generateSuggestionsHTML();
+    }
+  });
   return suggestionsHTML;
+}
+
+function followUser(i) {
+  const followedUser = suggestions[i];
+
+  const isAlreadyFollowed = stories.some(
+    (story) => story.author === followedUser.author
+  );
+
+  if (!isAlreadyFollowed) {
+    stories.push(followedUser);
+    suggestions.splice(i, 1);
+    save();
+    renderPage();
+  }
 }
 
 function postComment(i) {
@@ -628,7 +697,7 @@ function toggleStorySection() {
 
     // Einklappen der Suggestion-Section
     suggestionBox.classList.remove('unfolded');
-    suggestionBox.classList.add('default-height');
+    suggestionBox.classList.add('default-height', 'no-scroll');
     suggestionHeaderSpan.innerHTML = 'show all';
     suggestionSectionExpanded = false;
   } else {
