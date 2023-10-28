@@ -5,6 +5,8 @@ let cards = [
     location: 'Vienna, Austria',
     description: 'Worüber man nicht sprechen kann, darüber muss man schweigen.',
     poster: 'img/poster/poster1.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Wittgenstein Aaalter...üüübelst deep der Typ!',
       'Interessantes Zitat! Ich verstehs nicht...aber interessant...denk ich mal.',
@@ -28,6 +30,8 @@ let cards = [
     location: 'Ingolstadt, Germany',
     description: 'Die Vernunft ist das höchste Gut des Menschen.',
     poster: 'img/poster/poster2.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Hegel war ein großer Denker...über 1,90m!!!',
       'Seine Philosophie ist so beeindruckend.',
@@ -42,9 +46,11 @@ let cards = [
     location: 'Athen, Greece',
     description: 'Die Ideen sind die wahren Realitäten.',
     poster: 'img/poster/poster3.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Die Ideenwelt ist faszinierend.',
-      'Die Ideenwelt ist von Tschibo ist auch faszinierend! Jede Woche eine neue Welt. Schlauchboote, Wanderschuhe und Arabica-Bohnen.',
+      'Die Ideenwelt von Tschibo ist auch faszinierend! Jede Woche eine neue Welt. Schlauchboote, Wanderschuhe und Arabica-Bohnen.',
       'Was sind für dich wahre Realitäten?',
       'Platons Höhlengleichnis kommt mir in den Sinn.',
       'Ich geh auch in die Höhle gleich!',
@@ -54,6 +60,7 @@ let cards = [
       'reality_explorer',
       'cave_thinker',
       'idealist_dreamer',
+      'philosophy_student',
     ],
     likeStatus: [false, false, false, false],
     commentDisplayStatus: 'limited',
@@ -65,6 +72,8 @@ let cards = [
     description:
       'Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.',
     poster: 'img/poster/poster4.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Jepp...isso!',
       'Kommando Kant!',
@@ -92,6 +101,8 @@ let cards = [
     location: 'Stagira, Greece',
     description: 'Die Tugend liegt in der Mitte.',
     poster: 'img/poster/poster5.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Aristoteles über Tugendhaftigkeit. Sollte man sich mal mit beschäftigen!',
       'Die goldene Mitte. Da ist so bissl sein Ding.',
@@ -119,6 +130,8 @@ let cards = [
     location: 'Röcken, Germany',
     description: 'Gott ist tot.',
     poster: 'img/poster/poster6.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Urin kennt keine Grenzen!',
       'Geiler Schnurrbart!',
@@ -147,6 +160,8 @@ let cards = [
     location: 'Athen, Greece',
     description: 'Das einzig wahre Wissen ist, dass man nichts weiß.',
     poster: 'img/poster/poster7.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Was heißt das jetzt im Klartext? Immer dieses hochtrabende Geschwurbel!!!ELF!!1!',
       'Das ist mir zu GELB alles!.',
@@ -170,6 +185,8 @@ let cards = [
     location: 'La Haye en Touraine, France',
     description: 'Ich denke, also bin ich.',
     poster: 'img/poster/poster8.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Cleveres Kerlchen, der René.',
       'Der Beginn der modernen Philosophie.',
@@ -192,6 +209,8 @@ let cards = [
     description:
       'Manchmal ist schon allein weiterzumachen, einfach weiterzumachen, eine übermenschliche Leistung.',
     poster: 'img/poster/poster9.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Voll deep!',
       'Schöner Mann!',
@@ -208,6 +227,8 @@ let cards = [
     description:
       'Um den wahren Wert des Lebens zu begreifen, müssen wir es ab und zu riskieren.',
     poster: 'img/poster/poster10.jpg',
+    isPostLiked: 'false',
+    isBookmarked: 'false',
     comments: [
       'Das klingt übelst gefährlich!',
       'Existentialismus und Freiheit!',
@@ -338,18 +359,6 @@ function load() {
   console.log('Loaded suggestions:', suggestions);
 }
 
-// load();
-
-// Funktion zum Hinzufügen eines neuen Kommentars
-function addComment(i, author, comment) {
-  // Hinzufügen des Autors und Kommentars zu den entsprechenden Arrays
-  cards[i].commentAuthor.push(author);
-  cards[i].comments.push(comment);
-
-  // Speichern der aktualisierten Daten
-  save();
-}
-
 function renderPage() {
   const suggestedCont = document.getElementById('suggested-cont');
   suggestedCont.innerHTML = generateSuggestionsHTML();
@@ -374,6 +383,7 @@ function renderPinboard() {
 
     pinboard.innerHTML += renderCard(cardElement, i);
     renderUserComment(i);
+    renderSocialActions(i);
   }
 }
 
@@ -401,20 +411,11 @@ function renderCard(cardElement, i) {
             <img src="${cardElement['poster']}"/>
           </div>
 
-          <div class="social-actions">
-            <div class="icons-inline">
-              <svg 
-                width="36" 
-                height="36" 
-                viewBox="0 0 256 256">
-                <path fill="currentColor" d="M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z"/>
-              </svg>
-              <a href="#"><img src="img/icons/comment.svg" alt="" /></a>
-              <a href="#"><img src="img/icons/share.svg" alt="" /></a>
-            </div>
-            <div class="bookmark">
-              <a href="#"><img src="img/icons/bookmark.svg" alt="" /></a>
-            </div>
+          <div class="social-actions" id="socialActions-${i}">
+            
+          <!-- content injected via renderSocialActions() -->
+            
+
           </div>
 
           <div class="comment-section">
@@ -459,103 +460,13 @@ function renderCard(cardElement, i) {
   `;
 }
 
-function generateStoryHTML() {
-  let storyHTML = '';
+function addComment(i, author, comment) {
+  // Hinzufügen des Autors und Kommentars zu den entsprechenden Arrays
+  cards[i].commentAuthor.push(author);
+  cards[i].comments.push(comment);
 
-  for (let i = 0; i < stories.length; i++) {
-    const storyElement = stories[i];
-
-    storyHTML += /*html*/ `
-      <div class="story">
-        <img src="${storyElement['profileImg']}" alt="" class="story-profile__img" />
-        <div class="suggested-user">
-          <div class="username-and-update">
-            <p class="user">${storyElement['author']}</p>
-            <p class="update greyed">some time ago</p>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  return storyHTML;
-}
-
-// function generateSuggestionsHTML() {
-//   let suggestionsHTML = '';
-
-//   for (let i = 0; i < suggestions.length; i++) {
-//     const suggestElement = suggestions[i];
-//     suggestionsHTML += /*html*/ `
-//       <div class="suggested">
-//         <div class="user-info-box">
-//           <img src="${suggestElement['profileImg']}" alt="" class="suggested-profile__img" />
-//           <p class="user">${suggestElement['author']}</p>
-//         </div>
-//         <p onclick="followUser(${i})" class="follow-btn">Follow</p>
-
-//       </div>
-//     `;
-//   }
-//   return suggestionsHTML;
-// }
-
-// Fügen Sie diese Funktion hinzu, um den HTML-Inhalt für Vorschläge zu generieren
-
-function generateSuggestionsHTML() {
-  const suggestionHeaderSpan = document.getElementById('suggestionHeaderSpan');
-  const isMinimumSuggestions = suggestions.length <= 2;
-  suggestionHeaderSpan.innerHTML = isMinimumSuggestions ? '' : 'show all';
-
-  let suggestionsHTML = '';
-
-  if (suggestions.length === 0) {
-    // Wenn das suggestions-Array leer ist, zeige eine Nachricht
-    suggestionsHTML = /*html*/ `
-      <div class="suggested">
-        <p class="notice">No more suggestions yet</p>
-      </div>
-    `;
-  } else {
-    // Andernfalls generiere den normalen HTML-Inhalt
-    for (let i = 0; i < suggestions.length; i++) {
-      const suggestElement = suggestions[i];
-      suggestionsHTML += /*html*/ `
-        <div class="suggested">
-          <div class="user-info-box">
-            <img src="${suggestElement['profileImg']}" alt="" class="suggested-profile__img" />
-            <p class="user">${suggestElement['author']}</p>
-          </div>
-          <p onclick="followUser(${i})" class="follow-btn">Follow</p>
-        </div>
-      `;
-    }
-  }
-
-  // Fügen Sie diesen Event-Listener hinzu, um die Änderungen im suggestions-Array zu überwachen
-  document.addEventListener('DOMContentLoaded', function () {
-    // Hier überprüfen, ob das suggestions-Array leer ist und entsprechend reagieren
-    if (suggestions.length === 0) {
-      const suggestedCont = document.getElementById('suggested-cont');
-      suggestedCont.innerHTML = generateSuggestionsHTML();
-    }
-  });
-  return suggestionsHTML;
-}
-
-function followUser(i) {
-  const followedUser = suggestions[i];
-
-  const isAlreadyFollowed = stories.some(
-    (story) => story.author === followedUser.author
-  );
-
-  if (!isAlreadyFollowed) {
-    stories.push(followedUser);
-    suggestions.splice(i, 1);
-    save();
-    renderPage();
-  }
+  // Speichern der aktualisierten Daten
+  save();
 }
 
 function postComment(i) {
@@ -575,6 +486,112 @@ function postComment(i) {
     save();
     renderPage(); // Seite erneut rendern, um die Kommentare anzuzeigen
     renderUserComment(i);
+  }
+}
+
+function likePost(i) {
+  const card = cards[i];
+
+  // Überprüfen, ob der Post bereits geliked wurde
+  if (card.isPostLiked === 'true') {
+    // Post wurde bereits geliked: isPostLiked auf 'false' setzen
+    card.isPostLiked = 'false';
+  } else {
+    // Post wurde noch nicht geliked: isPostLiked auf 'true' setzen
+    card.isPostLiked = 'true';
+  }
+
+  save(); // Speichern der Änderungen
+  renderSocialActions(i); // Aktualisiere die Social Actions für diesen Post
+}
+
+function bookmark(i) {
+  const card = cards[i];
+
+  if (card.isBookmarked === 'true') {
+    card.isBookmarked = 'false';
+  } else {
+    card.isBookmarked = 'true';
+  }
+  console.log('ge-bookmarked!');
+  save();
+  renderSocialActions(i);
+}
+
+function renderSocialActions(i) {
+  const socialActionsContainer = document.getElementById(`socialActions-${i}`);
+  socialActionsContainer.innerHTML = ''; // Leeren des Containers
+
+  for (let k = 0; k < cards.length; k++) {
+    // Erstelle das Herzsymbol mit dem entsprechenden Pfad basierend auf isPostLiked
+    const likeSymbolPath =
+      cards[i].isPostLiked === 'true'
+        ? 'M240 94c0 70-103.79 126.66-108.21 129a8 8 0 0 1-7.58 0C119.79 220.66 16 164 16 94a62.07 62.07 0 0 1 62-62c20.65 0 38.73 8.88 50 23.89C139.27 40.88 157.35 32 178 32a62.07 62.07 0 0 1 62 62Z'
+        : 'M178 34c-21 0-39.26 9.47-50 25.34C117.26 43.47 99 34 78 34a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.68 334.68 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.68 334.68 0 0 0 53.06-37C219.8 153.59 238 123.2 238 94a60.07 60.07 0 0 0-60-60Zm-50 175.11C111.59 199.64 30 149.72 30 94a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 56.83 157.72 46 178 46a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11Z';
+
+    const bookmarkSymbolPath =
+      cards[i].isBookmarked === 'true'
+        ? 'M184 32H72a16 16 0 0 0-16 16v176a8 8 0 0 0 12.24 6.78L128 193.43l59.77 37.35A8 8 0 0 0 200 224V48a16 16 0 0 0-16-16Z'
+        : 'M184 34H72a14 14 0 0 0-14 14v176a6 6 0 0 0 9.18 5.09l60.81-38l60.83 38A6 6 0 0 0 198 224V48a14 14 0 0 0-14-14Zm2 179.17l-54.83-34.26a6 6 0 0 0-6.36 0L70 213.17V48a2 2 0 0 1 2-2h112a2 2 0 0 1 2 2Z';
+
+    // HTML für das Herzsymbol
+    const likeSymbolHTML = /*html*/ `
+    <svg 
+      onclick="likePost(${i})"
+      id="heart-icon-${i}"            
+      width="36" 
+      height="36" 
+      viewBox="0 0 256 256">
+      <path 
+        fill="#117460" 
+        d="${likeSymbolPath}"
+      />
+    </svg>
+    `;
+
+    // Restlichen HTML-Code für die anderen Symbole und das Lesezeichen
+    const commentAndShareSymbolHTML = /*html*/ `
+    <svg 
+      width="36" 
+      height="36" 
+      viewBox="0 0 24 24">
+      <path 
+        fill="#117460"  
+        d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z"/>
+    </svg>
+    <svg 
+      width="32"  
+      height="32" 
+      viewBox="0 0 24 24">
+      <path 
+        fill="#117460"
+        d="m15.7 6.92l-6.89 4.02c.12.33.19.69.19 1.06s-.07.73-.19 1.06l6.89 4.02A2.996 2.996 0 0 1 21 19c0 1.66-1.34 3-3 3s-3-1.34-3-3c0-.37.07-.73.19-1.06L8.3 13.92A2.996 2.996 0 0 1 3 12a2.996 2.996 0 0 1 5.3-1.92l6.89-4.02C15.07 5.73 15 5.37 15 5c0-1.66 1.34-3 3-3s3 1.34 3 3a2.996 2.996 0 0 1-5.3 1.92M18 21c1.11 0 2-.89 2-2s-.89-2-2-2s-2 .9-2 2s.9 2 2 2M6 14c1.11 0 2-.89 2-2s-.89-2-2-2s-2 .9-2 2s.89 2 2 2m12-7c1.11 0 2-.89 2-2s-.89-2-2-2s-2 .9-2 2s.9 2 2 2Z"/>
+    </svg>
+    `;
+
+    const bookmarkHTML = /*html*/ `
+    <svg 
+      onclick="bookmark(${i})"
+      id="bookmark-icon-${i}"
+      width="36" 
+      height="36" 
+      viewBox="0 0 256 256">
+      <path 
+        fill="#117460" 
+        d="${bookmarkSymbolPath}"/>
+    </svg>
+    `;
+
+    // Füge das generierte HTML in den Container ein
+    socialActionsContainer.innerHTML = /*html*/ `
+    <div class="icons-inline">
+      ${likeSymbolHTML}
+      ${commentAndShareSymbolHTML}
+    </div>
+    <div class="bookmark">
+      ${bookmarkHTML}
+    </div>
+    `;
   }
 }
 
@@ -634,7 +651,7 @@ function renderUserComment(i) {
             <div class="like-btn" onclick="likeComment(${i}, ${j})">
               <svg  viewBox="0 0 256 256">
                 <path
-                  fill="#6a6a6a"
+                  fill="#117460"
                   d="${heartPath}"
                 />
               </svg>
@@ -677,6 +694,84 @@ function toggleAllComments(i) {
 
 function getCommentCount(i) {
   return cards[i].comments.length;
+}
+
+function generateStoryHTML() {
+  let storyHTML = '';
+
+  for (let i = 0; i < stories.length; i++) {
+    const storyElement = stories[i];
+
+    storyHTML += /*html*/ `
+      <div class="story">
+        <img src="${storyElement['profileImg']}" alt="" class="story-profile__img" />
+        <div class="suggested-user">
+          <div class="username-and-update">
+            <p class="user">${storyElement['author']}</p>
+            <p class="update greyed">some time ago</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  return storyHTML;
+}
+
+function generateSuggestionsHTML() {
+  const suggestionHeaderSpan = document.getElementById('suggestionHeaderSpan');
+  const isMinimumSuggestions = suggestions.length <= 2;
+  suggestionHeaderSpan.innerHTML = isMinimumSuggestions ? '' : 'show all';
+
+  let suggestionsHTML = '';
+
+  if (suggestions.length === 0) {
+    // Wenn das suggestions-Array leer ist, zeige eine Nachricht
+    suggestionsHTML = /*html*/ `
+      <div class="suggested">
+        <p class="notice">No more suggestions yet</p>
+      </div>
+    `;
+  } else {
+    // Andernfalls generiere den normalen HTML-Inhalt
+    for (let i = 0; i < suggestions.length; i++) {
+      const suggestElement = suggestions[i];
+      suggestionsHTML += /*html*/ `
+        <div class="suggested">
+          <div class="user-info-box">
+            <img src="${suggestElement['profileImg']}" alt="" class="suggested-profile__img" />
+            <p class="user">${suggestElement['author']}</p>
+          </div>
+          <p onclick="followUser(${i})" class="follow-btn">Follow</p>
+        </div>
+      `;
+    }
+  }
+
+  // Fügen Sie diesen Event-Listener hinzu, um die Änderungen im suggestions-Array zu überwachen
+  document.addEventListener('DOMContentLoaded', function () {
+    // Hier überprüfen, ob das suggestions-Array leer ist und entsprechend reagieren
+    if (suggestions.length === 0) {
+      const suggestedCont = document.getElementById('suggested-cont');
+      suggestedCont.innerHTML = generateSuggestionsHTML();
+    }
+  });
+  return suggestionsHTML;
+}
+
+function followUser(i) {
+  const followedUser = suggestions[i];
+
+  const isAlreadyFollowed = stories.some(
+    (story) => story.author === followedUser.author
+  );
+
+  if (!isAlreadyFollowed) {
+    stories.push(followedUser);
+    suggestions.splice(i, 1);
+    save();
+    renderPage();
+  }
 }
 
 let storySectionExpanded = false;

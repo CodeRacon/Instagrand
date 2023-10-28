@@ -228,11 +228,10 @@ main {
   gap: 1rem;
 }
 
-.social-actions img {
+.social-actions svg {
   width: 36px;
   height: 36px;
-  filter: invert(12%) sepia(20%) saturate(400%) hue-rotate(97deg)
-    brightness(97%) contrast(90%);
+  cursor: pointer;
 }
 
 .comment-section {
