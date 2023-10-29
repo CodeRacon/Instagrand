@@ -262,12 +262,13 @@ let stories = [
     description:
       'Ich mag verdammen, was du sagst, aber ich werde mein Leben dafür einsetzen, dass du es sagen darfst.',
   },
+
   {
-    author: 'Confucius',
-    profileImg: 'img/profile/confucius.jpg',
-    location: 'Qufu, China',
+    author: 'Hannah Arendt',
+    profileImg: 'img/profile/arendt.jpg',
+    location: 'Linden, Germany',
     description:
-      'Unser größter Ruhm ist nicht, niemals zu fallen, sondern jedes Mal aufzustehen, wenn wir fallen.',
+      'Die Freiheit ist die Fähigkeit, zu sagen, was gesagt werden sollte.',
   },
 ];
 
@@ -280,11 +281,11 @@ let suggestions = [
       'Freiheit besteht nicht darin, seine Wünsche zu befriedigen, sondern in der Fähigkeit, seine Begierden zu kontrollieren.',
   },
   {
-    author: 'Hannah Arendt',
-    profileImg: 'img/profile/arendt.jpg',
-    location: 'Linden, Germany',
+    author: 'Confucius',
+    profileImg: 'img/profile/confucius.jpg',
+    location: 'Qufu, China',
     description:
-      'Die Freiheit ist die Fähigkeit, zu sagen, was gesagt werden sollte.',
+      'Unser größter Ruhm ist nicht, niemals zu fallen, sondern jedes Mal aufzustehen, wenn wir fallen.',
   },
   {
     author: 'Thales',

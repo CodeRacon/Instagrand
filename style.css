@@ -6,10 +6,6 @@
 
 /* <<< VARIABLES >>> */
 
-:root {
-  --search-icon: '<svg class="search-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 4a6.5 6.5 0 0 1 6.5 6.5c0 1.62-.59 3.1-1.57 4.23l5.65 5.65l-.71.71l-5.65-5.65A6.469 6.469 0 0 1 9.5 17A6.5 6.5 0 0 1 3 10.5A6.5 6.5 0 0 1 9.5 4m0 1A5.5 5.5 0 0 0 4 10.5A5.5 5.5 0 0 0 9.5 16a5.5 5.5 0 0 0 5.5-5.5A5.5 5.5 0 0 0 9.5 5Z"/></svg>';
-}
-
 @font-face {
   font-family: 'Sacramento';
   src: url('fonts/Sacramento-Regular.ttf');
@@ -370,7 +366,7 @@ main {
 aside {
   display: flex;
   flex-direction: column;
-  width: calc(33%);
+  width: 33%;
   position: sticky;
   top: 7rem;
 }
@@ -437,7 +433,7 @@ aside {
   gap: 1.125rem;
   padding: 0.25rem;
 
-  overflow: hidden;
+  overflow: auto;
 }
 
 .scroll {
@@ -456,7 +452,7 @@ aside {
 
 @keyframes unfold {
   to {
-    max-height: 39.25rem;
+    max-height: 21.125rem;
   }
 }
 
@@ -483,11 +479,11 @@ aside {
 }
 
 .unfolded {
-  max-height: 39.25rem;
+  max-height: 21.125rem;
 }
 
 .default-height {
-  max-height: 10rem;
+  max-height: 10.5rem;
 }
 
 .suggestions-header,
@@ -548,6 +544,10 @@ aside {
   gap: 0.375rem;
 }
 
+.user {
+  padding-right: 0.75rem;
+}
+
 .story {
   display: flex;
   align-items: center;
@@ -557,6 +557,7 @@ aside {
   font-weight: 500;
   color: #dbe4d9;
   height: 1rem;
+  padding-top: 6px;
   transition: all 0.15s ease-in-out;
 }
 
@@ -579,4 +580,82 @@ aside {
 .flex-spread {
   display: flex;
   justify-content: space-between;
+}
+
+/* 
+-------------------------
+<<<<< MEDIA-QUERIES >>>>> 
+-------------------------
+*/
+
+@media (width <= 1439px) {
+  header {
+    padding: 0 4rem;
+  }
+
+  main {
+    padding: 2rem 4rem 1rem;
+  }
+}
+
+@media (width <= 951px) {
+  main {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.125rem;
+    min-height: 100vh;
+    padding: 0rem 4rem 1rem;
+  }
+
+  .pinboard {
+    width: 100%;
+  }
+
+  aside {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    top: 6rem;
+  }
+
+  .right-column {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0.25rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .flex-spread.wrapper {
+    display: none;
+  }
+
+  .story-section,
+  .suggestion-section {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  @keyframes unfold {
+    to {
+      max-height: 21.125rem;
+    }
+  }
+
+  .unfolded {
+    max-height: 21.125rem;
+  }
+
+  @keyframes defaultHeight {
+    to {
+      max-height: 2.65rem;
+    }
+  }
+
+  .default-height {
+    max-height: 2.65rem;
+  }
 }

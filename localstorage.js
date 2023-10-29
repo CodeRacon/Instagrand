@@ -27,11 +27,9 @@ function load() {
   if (storiesData) {
     stories = JSON.parse(storiesData);
   }
-  console.log('Loaded stories:', stories);
 
   const suggestionsData = localStorage.getItem('suggestionsData');
   if (suggestionsData) {
     suggestions = JSON.parse(suggestionsData);
   }
-  console.log('Loaded suggestions:', suggestions);
 }

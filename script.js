@@ -362,7 +362,14 @@ function generateStoryHTML() {
 function generateSuggestionsHTML() {
   const suggestionHeaderSpan = document.getElementById('suggestionHeaderSpan');
   const isMinimumSuggestions = suggestions.length <= 2;
-  suggestionHeaderSpan.innerHTML = isMinimumSuggestions ? '' : 'show all';
+
+  if (window.innerWidth <= 951) {
+    suggestionHeaderSpan.innerHTML = isMinimumSuggestions
+      ? 'show all'
+      : 'show all';
+  } else {
+    suggestionHeaderSpan.innerHTML = isMinimumSuggestions ? '' : 'show all';
+  }
 
   let suggestionsHTML = '';
 
