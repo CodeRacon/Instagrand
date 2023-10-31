@@ -114,3 +114,26 @@ function resetSuggestionSection() {
     suggestionSectionExpanded = false;
   }
 }
+
+// BURGER-MENU
+
+const menuBtn = document.querySelector('.menu-btn');
+let menuOpen = false;
+menuBtn.addEventListener('click', () => {
+  if (!menuOpen) {
+    menuBtn.classList.add('open');
+    menuOpen = true;
+  } else {
+    menuBtn.classList.remove('open');
+    menuOpen = false;
+  }
+});
+
+const toggleButton = document.getElementById('toggler');
+const sideMenu = document.getElementById('sidemenu');
+const borderDummy = document.getElementById('borderDummy');
+
+toggleButton.addEventListener('click', () => {
+  sideMenu.classList.toggle('open-sidemenu');
+  borderDummy.classList.toggle('open-border-dummy');
+});
