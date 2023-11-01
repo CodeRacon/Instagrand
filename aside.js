@@ -1,5 +1,24 @@
 // ASIDE SECTIONS: STORIES & SUGGESTIONS
 
+// function to toggle the story section between expanded and collapsed states
+// - initializes variables for various elements and their current states
+// - if the story section is not expanded:
+//   * expands the story section:
+//     - updates CSS classes by removing 'default-height' and adding 'unfolded' to the story box
+//     - updates the header span text to 'show less'
+//     - adjusts the content container for scrolling
+//     - sets the storySectionExpanded flag to true
+//   * collapses the suggestion section:
+//     - updates CSS classes by removing 'unfolded' and adding 'default-height' and 'no-scroll' to the suggestion box
+//     - updates the suggestion header text based on the screen width
+//     - adjusts the content container for no scrolling
+//     - sets the suggestionSectionExpanded flag to false
+// - if the story section is expanded:
+//   * collapses the story section:
+//     - updates CSS classes by removing 'unfolded' and adding 'default-height' to the story box
+//     - adjusts the content container for no scrolling
+//     - updates the header span text to 'show all'
+//     - sets the storySectionExpanded flag to false
 let storySectionExpanded = false;
 let suggestionSectionExpanded = false;
 
@@ -14,7 +33,6 @@ function toggleStorySection() {
   const minSuggItems = suggestions.length <= 2;
 
   if (!storySectionExpanded) {
-    // Aufklappen der Story-Section
     storyBox.classList.remove('default-height');
     storyBox.classList.add('unfolded');
     storyHeaderSpan.innerHTML = 'show less';
@@ -22,7 +40,6 @@ function toggleStorySection() {
     storyCont.classList.add('scroll');
     storySectionExpanded = true;
 
-    // Einklappen der Suggestion-Section
     suggestionBox.classList.remove('unfolded');
     suggestionBox.classList.add('default-height', 'no-scroll');
 
@@ -36,7 +53,6 @@ function toggleStorySection() {
     suggestCont.classList.add('no-scroll');
     suggestionSectionExpanded = false;
   } else {
-    // Zurücksetzen in den Default-Modus
     storyBox.classList.remove('unfolded');
     storyBox.classList.add('default-height');
     storyCont.classList.remove('scroll');
@@ -47,13 +63,20 @@ function toggleStorySection() {
   }
 }
 
+// function to reset the story section to its default state
+// - initializes variables for various elements and their current state
+// - if the story section is expanded, it performs the following reset actions:
+//   * collapses the story section:
+//     - updates CSS classes to remove 'unfolded' and add 'default-height' to the story box
+//     - adjusts the content container for non-scrolling
+//     - updates the header span text to 'show all'
+//     - sets the storySectionExpanded status to false
 function resetStorySection() {
   const storyBox = document.getElementById('stories');
   const storyHeaderSpan = document.getElementById('storyHeaderSpan');
   const storyCont = document.getElementById('stories-cont');
 
   if (storySectionExpanded) {
-    // Zurücksetzen der Story-Section in den Default-Modus
     storyBox.classList.remove('unfolded');
     storyBox.classList.add('default-height');
     storyHeaderSpan.innerHTML = 'show all';
@@ -62,6 +85,26 @@ function resetStorySection() {
     storySectionExpanded = false;
   }
 }
+
+// function to toggle the suggestion section between expanded and collapsed states.
+// - initializes variables for various elements and their current states.
+// - if the suggestion section is not expanded:
+//   * expands the suggestion section:
+//     - updates CSS classes to remove 'default-height' and add 'unfolded' to the suggestion box.
+//     - updates the suggestion header text to 'show less'.
+//     - adjusts the content container for scrolling.
+//     - sets the suggestionSectionExpanded flag to true.
+//   * collapses the story section:
+//     - updates CSS classes to remove 'unfolded' and add 'default-height' and 'no-scroll' to the story box.
+//     - updates the story header text based on the screen width.
+//     - adjusts the content container for non-scrolling.
+//     - sets the storySectionExpanded flag to false.
+// - if the suggestion section is expanded:
+//   * collapses the suggestion section:
+//     - updates CSS classes to remove 'unfolded' and add 'default-height' to the suggestion box.
+//     - updates the suggestion header text to 'show all'.
+//     - adjusts the content container for non-scrolling.
+//     - sets the suggestionSectionExpanded status to false.
 
 function toggleSuggestionSection() {
   const suggestionBox = document.getElementById('suggestions');
@@ -73,7 +116,6 @@ function toggleSuggestionSection() {
   const storyHeaderSpan = document.getElementById('storyHeaderSpan');
 
   if (!suggestionSectionExpanded) {
-    // Aufklappen der Suggestion-Section
     suggestionBox.classList.remove('default-height');
     suggestionBox.classList.add('unfolded');
     suggestionHeaderSpan.innerHTML = 'show less';
@@ -81,7 +123,6 @@ function toggleSuggestionSection() {
     suggestCont.classList.add('scroll');
     suggestionSectionExpanded = true;
 
-    // Einklappen der Story-Section
     storyBox.classList.remove('unfolded');
     storyBox.classList.add('default-height');
     storyHeaderSpan.innerHTML = 'show all';
@@ -89,7 +130,6 @@ function toggleSuggestionSection() {
     storyCont.classList.add('no-scroll');
     storySectionExpanded = false;
   } else {
-    // Zurücksetzen in den Default-Modus
     suggestionBox.classList.remove('unfolded');
     suggestionBox.classList.add('default-height');
     suggestionHeaderSpan.innerHTML = 'show all';
@@ -99,13 +139,20 @@ function toggleSuggestionSection() {
   }
 }
 
+// function to reset the suggestion section to its default state.
+// - initializes variables for various elements and their current state.
+// - if the suggestion section is expanded, it performs the following reset actions:
+//   * collapses the suggestion section:
+//     - updates CSS classes to remove 'unfolded' and add 'default-height' to the suggestion box.
+//     - adjusts the content container for non-scrolling.
+//     - updates the suggestion header text to 'show all'.
+//     - sets the suggestionSectionExpanded flag to false.
 function resetSuggestionSection() {
   const suggestionBox = document.getElementById('suggestions');
   const suggestionHeaderSpan = document.getElementById('suggestionHeaderSpan');
   const suggestCont = document.getElementById('suggested-cont');
 
   if (suggestionSectionExpanded) {
-    // Zurücksetzen der Suggestion-Section in den Default-Modus
     suggestionBox.classList.remove('unfolded');
     suggestionBox.classList.add('default-height');
     suggestionHeaderSpan.innerHTML = 'show all';
@@ -116,6 +163,10 @@ function resetSuggestionSection() {
 }
 
 // BURGER-MENU
+
+// function to handle the click event on the menu button
+// - when the button is clicked, it toggles the 'open' class on the menu button element
+// - updates the menuOpen flag to keep track of the menu's open/closed state
 
 const menuBtn = document.querySelector('.menu-btn');
 let menuOpen = false;
@@ -129,6 +180,9 @@ menuBtn.addEventListener('click', () => {
   }
 });
 
+// function to handle the click event on the toggle button
+// - when the button is clicked, it toggles the 'open-sidemenu' and 'open-border-dummy' classes
+//   on the side menu and border-dummy elements
 const toggleButton = document.getElementById('toggler');
 const sideMenu = document.getElementById('sidemenu');
 const borderDummy = document.getElementById('borderDummy');
