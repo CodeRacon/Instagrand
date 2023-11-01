@@ -42,6 +42,17 @@ function renderPinboard() {
     renderUserComment(i);
     renderSocialActions(i);
   }
+
+  pinboard.innerHTML += /*html*/ `
+    <section>
+          <div class="base-note">
+            <p>"look mum, i can computer!" </p>
+            
+             <span>proudly coded by meikel</span> </p>
+            <img src="img/icons/MB-icon-color.png" alt="" />
+          </div>
+        </section>
+  `;
 }
 
 //  =  this function constructs an HTML card element using the information from the cardElement
